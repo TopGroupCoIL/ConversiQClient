@@ -1,11 +1,15 @@
-import { Typography } from 'antd';
+import { Flex } from 'antd';
 
-export const SideBarHeader = () => {
+type SideBarHeaderProps = {
+  isSidebarCollapsed: boolean;
+};
+
+export const SideBarHeader = ({ isSidebarCollapsed }: SideBarHeaderProps) => {
   return (
-    <Typography.Title level={4} className="text-center">
-      ConversiQ
-      <br />
-      System administration
-    </Typography.Title>
+    <Flex>
+      <span className="text-4xl text-center mt-4 mb-8">
+        {isSidebarCollapsed ? 'CQ' : 'ConversiQ'}
+      </span>
+    </Flex>
   );
 };
