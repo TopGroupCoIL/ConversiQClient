@@ -1,1 +1,0 @@
-export { RoutesComponent } from './Routes';
