@@ -1,1 +1,0 @@
-export { NumberOfUsers } from './NumberOfUsers';
