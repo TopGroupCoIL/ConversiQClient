@@ -7,10 +7,20 @@ import React, {
   SetStateAction,
   Dispatch,
 } from 'react';
-import { Admin, QuestionPart } from '../types';
+import { Admin, Customer, CustomerUser } from '../types';
+import { FieldType as AdminFieldType } from '../components/Admins/Admins';
+import { FieldType as CustomerFieldType } from '../components/Customers/Customers';
+import { FieldType as CustomerUserFieldType } from '../components/Customers/CustomerUsers/CustomerUsers';
 
 const initialModalState = {
-  showCorrectExpressionModal: false,
+  showAddAdminModal: false,
+  showEditAdminModal: false,
+  showDeleteAdminModal: false,
+  showAddCustomerModal: false,
+  showDeleteCustomerModal: false,
+  showAddCustomerUserModal: false,
+  showEditCustomerUserModal: false,
+  showDeleteCustomerUserModal: false,
   showLogoutModal: false,
 };
 
@@ -23,7 +33,16 @@ interface IAction {
 
 type TActiveItem = {
   admin?: Admin;
-  correctExpression: (parts: QuestionPart[]) => void;
+  customer?: Customer;
+  customerUser?: CustomerUser;
+  addAdmin?: (values: AdminFieldType) => void;
+  editAdmin?: (values: AdminFieldType) => Promise<Admin | boolean>;
+  deleteAdmin?: () => void;
+  addCustomer?: (values: CustomerFieldType) => void;
+  deleteCustomer?: () => void;
+  addCustomerUser?: (values: CustomerUserFieldType) => void;
+  editCustomerUser?: (values: AdminFieldType) => Promise<Admin | boolean>;
+  deleteCustomerUser?: () => void;
 } | null;
 
 export interface IModalsContext<T = TActiveItem> extends IModalState {

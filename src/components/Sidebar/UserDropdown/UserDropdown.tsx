@@ -3,11 +3,7 @@ import { Button, Dropdown, MenuProps, Space } from 'antd';
 import { useModals } from '../../../context/modals';
 import { useAuthContext } from '../../../context/auth';
 
-type UserDropdownProps = {
-  isSidebarCollapsed: boolean;
-};
-
-export const UserDropdown = ({ isSidebarCollapsed }: UserDropdownProps) => {
+export const UserDropdown = () => {
   const { openModal } = useModals();
   const { user } = useAuthContext();
 
@@ -23,7 +19,7 @@ export const UserDropdown = ({ isSidebarCollapsed }: UserDropdownProps) => {
             openModal('LogoutModal');
           }}
         >
-          {isSidebarCollapsed ? '' : 'Logout'}
+          Logout
         </Button>
       ),
       key: 'logout',
@@ -31,11 +27,9 @@ export const UserDropdown = ({ isSidebarCollapsed }: UserDropdownProps) => {
   ];
 
   return (
-    <Dropdown menu={{ items }} className="bg-white">
+    <Dropdown menu={{ items }} className="bg-white mt-auto mb-16">
       <Space>
-        <Button type="text" style={{ fontSize: 16 }} icon={<UserOutlined />}>
-          {isSidebarCollapsed ? '' : user?.name}
-        </Button>
+        <Button icon={<UserOutlined />}>{user?.name}</Button>
       </Space>
     </Dropdown>
   );

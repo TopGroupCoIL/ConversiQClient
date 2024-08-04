@@ -1,8 +1,25 @@
-import { CorrectExpressionModal, LogoutModal } from '../modals';
+import {
+  AddAdminModal,
+  EditAdminModal,
+  DeleteAdminModal,
+  AddCustomerModal,
+  DeleteCustomerModal,
+  AddCustomerUserModal,
+  EditCustomerUserModal,
+  DeleteCustomerUserModal,
+  LogoutModal,
+} from '../modals';
 
 export const Modals = () => (
   <>
-    <CorrectExpressionModal />
+    <AddAdminModal />
+    <EditAdminModal />
+    <DeleteAdminModal />
+    <AddCustomerModal />
+    <DeleteCustomerModal />
+    <AddCustomerUserModal />
+    <EditCustomerUserModal />
+    <DeleteCustomerUserModal />
     <LogoutModal />
   </>
 );

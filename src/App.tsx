@@ -1,17 +1,19 @@
+import { Layout } from 'antd';
+import { Sidebar } from './components/Sidebar';
 import { MainContent } from './components/MainContent/MainContent';
 import { AuthProvider } from './context/auth';
 import { ModalsProvider } from './context/modals';
 import { Modals } from './components/Modals';
-import { ChatProvider } from './context/chat';
 
 export const App = () => {
   return (
     <AuthProvider>
       <ModalsProvider>
-        <ChatProvider>
+        <Layout className="w-full h-full bg-white">
+          <Sidebar />
           <MainContent />
-          <Modals />
-        </ChatProvider>
+        </Layout>
+        <Modals />
       </ModalsProvider>
     </AuthProvider>
   );

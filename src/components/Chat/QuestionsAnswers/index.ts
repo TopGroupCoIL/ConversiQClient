@@ -1,1 +1,0 @@
-export { QuestionsAnswers } from './QuestionsAnswers';

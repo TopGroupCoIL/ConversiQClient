@@ -1,1 +1,0 @@
-export { NameHeader } from './NameHeader';
