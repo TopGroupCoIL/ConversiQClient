@@ -1,4 +1,3 @@
-export const msLoginLink = 'http://localhost:8080/Auth/microsoft-login';
 export const expiredSession = 'expiredSession';
 export const expiredSessionText = 'you need to login for continue';
 

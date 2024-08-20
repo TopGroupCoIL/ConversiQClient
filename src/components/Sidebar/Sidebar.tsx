@@ -1,10 +1,11 @@
-import { Button, Flex, Layout, Tooltip } from 'antd';
+import { Button, ConfigProvider, Flex, Layout, Tooltip } from 'antd';
 import { useAuthContext } from '../../context/auth';
 import { UserDropdown } from './UserDropdown';
 import { SideBarHeader } from './SidebarHeader';
 import {
   CommentOutlined,
   DatabaseOutlined,
+  DeleteOutlined,
   PlusCircleOutlined,
   QuestionCircleOutlined,
   SettingOutlined,
@@ -12,9 +13,15 @@ import {
 } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ADMINISTRATION_PATH } from '../../const';
+import { useChat } from '../../context/chat';
+import { useModals } from '../../context/modals';
+import { SavedChats } from './SavedChats';
 
 export const Sidebar = () => {
   const { user } = useAuthContext();
+  const { openModal, setActiveItem } = useModals();
+  const { currentChat, /*isCurrentChatSaved*/ chats, startNewChat, saveChat } =
+    useChat();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -28,6 +35,28 @@ export const Sidebar = () => {
     return null;
   }
 
+  const onNew = () => {
+    setActiveItem({
+      onLeave: () => {
+        startNewChat();
+      },
+      saveChat,
+    });
+
+    openModal('CreateNewChatModal');
+  };
+
+  const onSavedChatClick = (chatName: string) => {
+    setActiveItem({
+      onLeave: () => {
+        startNewChat(chatName);
+      },
+      saveChat,
+    });
+
+    openModal('CreateNewChatModal');
+  };
+
   const renderDefaultItems = () => (
     <>
       {collapsed ? (
@@ -36,6 +65,8 @@ export const Sidebar = () => {
             type="text"
             style={{ fontSize: 16 }}
             icon={<PlusCircleOutlined />}
+            disabled={!currentChat}
+            onClick={onNew}
           >
             {collapsed ? '' : 'New'}
           </Button>
@@ -45,12 +76,14 @@ export const Sidebar = () => {
           type="text"
           style={{ fontSize: 16 }}
           icon={<PlusCircleOutlined />}
+          onClick={onNew}
+          disabled={!currentChat}
         >
           New
         </Button>
       )}
       <Button type="text" style={{ fontSize: 16 }} icon={<CommentOutlined />}>
-        {collapsed ? '' : 'Previews'}
+        {collapsed ? '' : 'Saved'}
       </Button>
     </>
   );
@@ -148,12 +181,18 @@ export const Sidebar = () => {
         /> */}
         <Flex
           vertical
-          className="w-full h-20 mt-4 mb-16"
+          className="w-full h-20 mt-4 mb-4"
           justify="space-between"
           align={collapsed ? 'center' : 'flex-start'}
         >
           {isAdministrationPage ? renderAdminItems() : renderDefaultItems()}
         </Flex>
+        <SavedChats
+          chats={chats}
+          currentChatName={currentChat?.name}
+          onChatClick={onSavedChatClick}
+          onDeleteChatClick={() => {}}
+        />
         <Flex
           vertical
           className="w-full h-32 mt-auto mb-16"

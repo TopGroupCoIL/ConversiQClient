@@ -1,16 +1,24 @@
 import { MoreOutlined } from '@ant-design/icons';
-import { Dropdown, Flex, MenuProps } from 'antd';
+import { ConfigProvider, Dropdown, Flex, MenuProps } from 'antd';
 
 type NameHeaderProps = {
   initialChatName: string;
-  updateName: (name: string) => void;
+  onUpdateName: () => void;
+  onSaveChat: () => void;
 };
 
 export const NameHeader = ({
   initialChatName,
-}: // updateName,
-NameHeaderProps) => {
-  const onMenuClick: MenuProps['onClick'] = () => {};
+  onUpdateName,
+  onSaveChat,
+}: NameHeaderProps) => {
+  const onMenuClick: MenuProps['onClick'] = (e) => {
+    if (e.key === 'save') {
+      onSaveChat();
+    } else {
+      onUpdateName();
+    }
+  };
 
   const items = [
     {
@@ -18,25 +26,36 @@ NameHeaderProps) => {
       label: 'Save',
     },
     {
-      key: 'updateName',
-      label: 'Update name',
+      key: 'editName',
+      label: 'Edit name',
     },
   ];
 
   return (
     <Flex
-      justify="center"
+      justify="flex-start"
       align="center"
-      className="absolute w-full h-16 top-0"
+      className="absolute w-full px-16 h-16 top-0"
     >
-      <Dropdown.Button
-        type="text"
-        menu={{ items, onClick: onMenuClick }}
-        icon={<MoreOutlined />}
-        className="text-lg w-auto font-bold"
+      <ConfigProvider
+        theme={{
+          components: {
+            Button: {
+              contentFontSize: 24,
+              fontWeight: 700,
+            },
+          },
+        }}
       >
-        {initialChatName}
-      </Dropdown.Button>
+        <Dropdown.Button
+          type="text"
+          menu={{ items, onClick: onMenuClick }}
+          icon={<MoreOutlined />}
+          className="text-lg w-auto font-bold"
+        >
+          {initialChatName}
+        </Dropdown.Button>
+      </ConfigProvider>
     </Flex>
   );
 };

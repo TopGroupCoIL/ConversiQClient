@@ -10,6 +10,9 @@ import React, {
 import { Admin, QuestionPart } from '../types';
 
 const initialModalState = {
+  showCreateNewChatModal: false,
+  showSaveChatModal: false,
+  showUpdateChatNameModal: false,
   showCorrectExpressionModal: false,
   showLogoutModal: false,
 };
@@ -23,7 +26,11 @@ interface IAction {
 
 type TActiveItem = {
   admin?: Admin;
-  correctExpression: (parts: QuestionPart[]) => void;
+  chatName?: string;
+  onLeave?: (chatName?: string) => void;
+  saveChat?: () => void;
+  updateChatName?: (chatName: string) => void;
+  correctExpression?: (parts: QuestionPart[]) => void;
 } | null;
 
 export interface IModalsContext<T = TActiveItem> extends IModalState {

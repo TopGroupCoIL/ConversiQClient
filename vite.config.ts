@@ -6,7 +6,7 @@ import { viteSingleFile } from 'vite-plugin-singlefile';
 export default defineConfig({
   base: '/',
   server: {
-    origin: 'http://localhost:8080',
+    origin: 'https://poc-conversiq-384717576.il-central-1.elb.amazonaws.com',
   },
   plugins: [react(), viteSingleFile()],
 });

@@ -3,11 +3,13 @@ import { useAuthContext } from '../../context/auth';
 import { Button, Typography, Layout, Alert } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
 import { useCallback, useEffect, useState } from 'react';
-import { ACCESS_TOKEN, expiredSession, msLoginLink } from '../../const';
+import { ACCESS_TOKEN, expiredSession } from '../../const';
 import { removeAccessTokenFromCookie } from '../../utils';
 import Cookies from 'universal-cookie';
 
 const { Title } = Typography;
+
+const msLoginLink = `${import.meta.env.VITE_BASE_URL}/Auth/microsoft-login`;
 
 export const Login = () => {
   const { state } = useLocation();

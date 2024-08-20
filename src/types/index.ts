@@ -75,6 +75,13 @@ export enum AnswerType {
   continue = 'continue',
 }
 
+export type AnswerGrid = {
+  description: string;
+  columns: string[];
+  rows: string[];
+  data: { formattedValue: string; value: string }[][];
+};
+
 export type Answer = {
   type: AnswerType;
   question: string;
@@ -88,7 +95,24 @@ export type Answer = {
   showCancel: boolean;
   showExpressionFound: boolean;
   showAll: boolean;
-  grid: null;
+  grid: AnswerGrid;
   error: null;
   debugInfo: string | null;
+};
+
+export type AnswerToolbar = {
+  isAsking: boolean;
+  showAll?: boolean;
+  showBack?: boolean;
+  showCancel?: boolean;
+  showCorrectExpression?: boolean;
+  showExpressionFound?: boolean;
+  showNext?: boolean;
+  disableExpressionFound?: boolean;
+  onShowAllClick: () => void;
+  onBackClick: () => void;
+  onCancelClick: () => void;
+  onCorrectionClick: () => void;
+  onUseThisClick: () => void;
+  onGoLowerClick: () => void;
 };

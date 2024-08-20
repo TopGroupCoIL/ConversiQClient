@@ -8,23 +8,27 @@ import { Answer, Chat, ChatHistory, Question } from '../types';
 
 type IChatState = {
   currentChat: Chat | null;
+  isCurrentChatSaved: boolean;
   chats: Chat[];
 };
 
 const initialChatState = {
   currentChat: null,
+  isCurrentChatSaved: false,
   chats: [],
 };
 
 interface IAction {
-  payload: Question | Answer | ChatHistory | string;
+  payload: Question | Answer | ChatHistory | string | null;
   type: string;
 }
 
 export interface IChatContext extends IChatState {
+  startNewChat: (chatName?: string) => void;
   setQuestion: (question: Question) => void;
   setAnswer: (answer: Answer) => void;
   updateChatName: (newName: string) => void;
+  saveChat: () => void;
   selectOption: (selectedItems: string) => void;
 }
 
@@ -32,15 +36,29 @@ const ChatContext = createContext<IChatContext | null>(null);
 
 export const CONTEXT_ERROR_MESSAGE = 'useChat must be used within ChatProvider';
 
+export const START_NEW_CHAT = 'START_NEW_CHAT';
 export const SET_QUESTION = 'SET_QUESTION';
 export const SET_ANSWER = 'SET_ANSWER';
 export const UPDATE_CHAT_HISTORY = 'UPDATE_CHAT_HISTORY';
 export const UPDATE_CHAT_NAME = 'UPDATE_CHAT_NAME';
+export const SAVE_CHAT = 'SAVE_CHAT';
 
 export const SELECT_ITEM = 'SELECT_ITEM';
 
 const chatReducer = (state: IChatState, action: IAction): IChatState => {
   switch (action.type) {
+    case START_NEW_CHAT: {
+      const chatName = action.payload;
+
+      if (!chatName) {
+        return { ...state, currentChat: null };
+      }
+
+      return {
+        ...state,
+        currentChat: state.chats.find((chat) => chat.name === chatName)!,
+      };
+    }
     case SET_QUESTION: {
       const question = action.payload as Question;
 
@@ -49,7 +67,7 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
           ...state,
           currentChat: {
             id: 'newChat',
-            name: 'New chat',
+            name: question.value!,
             history: [{ question }],
           },
         };
@@ -130,10 +148,25 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
         },
       };
     }
-    case UPDATE_CHAT_NAME:
+    case UPDATE_CHAT_NAME: {
+      const name = action.payload as string;
+
       return {
         ...state,
-        currentChat: { ...state.currentChat!, name: action.payload as string },
+        currentChat: { ...state.currentChat!, name },
+        chats: state.chats.map((chat) => {
+          if (chat.name === state.currentChat?.name) {
+            return { ...chat, name };
+          }
+
+          return chat;
+        }),
+      };
+    }
+    case SAVE_CHAT:
+      return {
+        ...state,
+        chats: [...state.chats, state.currentChat!],
       };
     default:
       return state;
@@ -148,9 +181,17 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   //     chatDispatch({
   //       type: UPDATE_CHAT_HISTORY,
   //       payload: chatHistory,
-  //     }),
+  //
   //   [],
   // );
+
+  const isCurrentChatSaved =
+    !!chatState.currentChat &&
+    !!chatState.chats.find((chat) => chat.name === chatState.currentChat?.name);
+
+  const startNewChat = useCallback((chatName?: string) => {
+    chatDispatch({ type: START_NEW_CHAT, payload: chatName || null });
+  }, []);
 
   const setQuestion = useCallback((question: Question) => {
     chatDispatch({ type: SET_QUESTION, payload: question });
@@ -173,12 +214,19 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     [],
   );
 
+  const saveChat = useCallback(() => {
+    chatDispatch({ type: SAVE_CHAT, payload: null });
+  }, []);
+
   const contextValue = {
     ...chatState,
+    isCurrentChatSaved,
+    startNewChat,
     setQuestion,
     setAnswer,
     selectOption,
     updateChatName,
+    saveChat,
   };
 
   return (
