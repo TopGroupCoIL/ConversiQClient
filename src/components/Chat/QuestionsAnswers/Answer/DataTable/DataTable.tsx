@@ -6,8 +6,7 @@ type DataTableProps = {
 };
 
 interface DataType {
-  title: string;
-  key: string;
+  [x: string]: string;
   name: string;
 }
 
@@ -17,7 +16,6 @@ export const DataTable = ({ grid }: DataTableProps) => {
       title: '',
       dataIndex: 'name',
       key: 'name',
-      render: (text) => <a>{text}</a>,
     },
     ...grid.columns.map((title) => ({ title, dataIndex: title, key: title })),
   ];

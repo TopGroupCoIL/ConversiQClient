@@ -1,11 +1,10 @@
-import { Button, ConfigProvider, Flex, Layout, Tooltip } from 'antd';
+import { Button, Flex, Layout, Tooltip } from 'antd';
 import { useAuthContext } from '../../context/auth';
 import { UserDropdown } from './UserDropdown';
 import { SideBarHeader } from './SidebarHeader';
 import {
   CommentOutlined,
   DatabaseOutlined,
-  DeleteOutlined,
   PlusCircleOutlined,
   QuestionCircleOutlined,
   SettingOutlined,
