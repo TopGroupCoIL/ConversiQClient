@@ -1,0 +1,1 @@
+export { GridRepresentation } from './GridRepresentation';

@@ -6,9 +6,9 @@ import {
   QuestionType,
 } from '../../../../types';
 import { LoadingOutlined } from '@ant-design/icons';
-import { DataTable } from './DataTable';
 import { AnswerToolbar } from './AnswerToolbar';
 import { AnswerOptions } from './AnswerOptions';
+import { GridRepresentation } from './GridRepresentation';
 
 type AnswerProps = {
   answer: AnswerObject | undefined;
@@ -77,7 +77,7 @@ export const Answer = ({
           <>
             {answer.grid && (
               <div className="m-2.5">
-                <DataTable grid={answer.grid} />
+                {<GridRepresentation grid={answer.grid} />}
               </div>
             )}
             <div className="mb-2.5">{answer.question}</div>
@@ -96,7 +96,9 @@ export const Answer = ({
                   showCancel={answer.showCancel}
                   showCorrectExpression={answer.showCorrectExpression}
                   showExpressionFound={answer.showExpressionFound}
-                  showNext={answer.showNext}
+                  showGoLower={
+                    answer.showNext && answer.type !== AnswerType.result
+                  }
                   disableExpressionFound={
                     answer && answer.selected && !answer.selected.length
                   }

@@ -7,7 +7,7 @@ export const AnswerToolbar = ({
   // showCancel,
   // showCorrectExpression,
   showExpressionFound,
-  showNext,
+  showGoLower,
   disableExpressionFound,
   onShowAllClick,
   // onBackClick,
@@ -33,7 +33,7 @@ export const AnswerToolbar = ({
           Use this
         </Button>
       )}
-      {showNext && (
+      {showGoLower && (
         <Button disabled={disableExpressionFound} onClick={onGoLowerClick}>
           Go lower here
         </Button>
