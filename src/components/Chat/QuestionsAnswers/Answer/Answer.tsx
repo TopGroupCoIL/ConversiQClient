@@ -15,7 +15,7 @@ type AnswerProps = {
   isLastAnswer: boolean;
   askQuestion: (question: Question) => void;
   onCorrectionClick: () => void;
-  selectOption?: (option: string) => void;
+  selectOption: (option: string) => void;
 };
 
 export const Answer = ({
@@ -35,18 +35,24 @@ export const Answer = ({
     askQuestion({ type: QuestionType.get_all, value: null, parts: null });
   };
 
-  const onUseThisClick = () => {
+  const onUseThisClick = (option?: string) => {
+    const value =
+      typeof option === 'string' ? option : answer!.selected.join('|') || null;
+
     askQuestion({
       type: QuestionType.found,
-      value: answer!.selected.join('|') || null,
+      value,
       parts: null,
     });
   };
 
-  const onGoLowerClick = () => {
+  const onGoLowerClick = (option?: string) => {
+    const value =
+      typeof option === 'string' ? option : answer!.selected.join('|') || null;
+
     askQuestion({
       type: QuestionType.next,
-      value: answer!.selected.join('|') || null,
+      value,
       parts: null,
     });
   };
@@ -57,6 +63,26 @@ export const Answer = ({
 
   const onCancelClick = () => {
     askQuestion({ type: QuestionType.cancel, value: null, parts: null });
+  };
+
+  const onOptionSelect = (option: string) => {
+    selectOption(option);
+
+    if (!answer) {
+      return;
+    }
+
+    if (answer.multiSelection) {
+      return;
+    }
+
+    if (answer.showExpressionFound) {
+      onUseThisClick(option);
+    }
+
+    if (answer.showNext) {
+      onGoLowerClick(option);
+    }
   };
 
   return (
@@ -86,7 +112,7 @@ export const Answer = ({
                 options={answer.options}
                 selectedOptions={answer.selected}
                 isLastAnswer={isLastAnswer}
-                selectOption={selectOption}
+                selectOption={onOptionSelect}
               />
               {isToolbarDisplayed && (
                 <AnswerToolbar
@@ -95,9 +121,14 @@ export const Answer = ({
                   showBack={answer.showBack}
                   showCancel={answer.showCancel}
                   showCorrectExpression={answer.showCorrectExpression}
-                  showExpressionFound={answer.showExpressionFound}
+                  showUseThis={
+                    answer.showExpressionFound &&
+                    (answer.multiSelection || answer.showNext)
+                  }
                   showGoLower={
-                    answer.showNext && answer.type !== AnswerType.result
+                    answer.showNext &&
+                    answer.type !== AnswerType.result &&
+                    (answer.multiSelection || answer.showExpressionFound)
                   }
                   disableExpressionFound={
                     answer && answer.selected && !answer.selected.length

@@ -4,7 +4,7 @@ type AnswerOptionsProps = {
   options: string[];
   selectedOptions: string[];
   isLastAnswer: boolean;
-  selectOption?: (option: string) => void;
+  selectOption: (option: string) => void;
 };
 
 export const AnswerOptions = ({
@@ -30,7 +30,7 @@ export const AnswerOptions = ({
             className="ml-2"
             onClick={() => {
               if (isLastAnswer) {
-                selectOption && selectOption(option);
+                selectOption(option);
               }
             }}
             key={option.length}

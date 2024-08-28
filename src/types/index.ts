@@ -106,7 +106,7 @@ export type AnswerToolbar = {
   showBack?: boolean;
   showCancel?: boolean;
   showCorrectExpression?: boolean;
-  showExpressionFound?: boolean;
+  showUseThis?: boolean;
   showGoLower?: boolean;
   disableExpressionFound?: boolean;
   onShowAllClick: () => void;

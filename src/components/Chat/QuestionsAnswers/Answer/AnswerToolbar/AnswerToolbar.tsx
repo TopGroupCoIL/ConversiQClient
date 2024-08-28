@@ -6,7 +6,7 @@ export const AnswerToolbar = ({
   // showBack,
   // showCancel,
   // showCorrectExpression,
-  showExpressionFound,
+  showUseThis,
   showGoLower,
   disableExpressionFound,
   onShowAllClick,
@@ -22,13 +22,13 @@ export const AnswerToolbar = ({
       justify="center"
       align="center"
     >
-      {showAll && <Button onClick={onShowAllClick}>All</Button>}
+      {showAll && <Button onClick={onShowAllClick}>Show all options</Button>}
       {/* {showBack && <Button onClick={onBackClick}>Back</Button>} */}
       {/* {showCancel && <Button onClick={onCancelClick}>Cancel</Button>} */}
       {/* {showCorrectExpression && (
         <Button onClick={onCorrectionClick}>Correct expression</Button>
       )} */}
-      {showExpressionFound && (
+      {showUseThis && (
         <Button disabled={disableExpressionFound} onClick={onUseThisClick}>
           Use this
         </Button>
