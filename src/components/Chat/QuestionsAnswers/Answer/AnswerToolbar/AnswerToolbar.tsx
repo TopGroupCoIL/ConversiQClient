@@ -3,14 +3,14 @@ import { AnswerToolbar as AnswerToolbarProps } from '../../../../../types';
 
 export const AnswerToolbar = ({
   showAll,
-  // showBack,
+  showBack,
   // showCancel,
   // showCorrectExpression,
   showUseThis,
   showGoLower,
   disableExpressionFound,
   onShowAllClick,
-  // onBackClick,
+  onBackClick,
   // onCancelClick,
   // onCorrectionClick,
   onUseThisClick,
@@ -23,7 +23,7 @@ export const AnswerToolbar = ({
       align="center"
     >
       {showAll && <Button onClick={onShowAllClick}>Show all options</Button>}
-      {/* {showBack && <Button onClick={onBackClick}>Back</Button>} */}
+      {showBack && <Button onClick={onBackClick}>Back</Button>}
       {/* {showCancel && <Button onClick={onCancelClick}>Cancel</Button>} */}
       {/* {showCorrectExpression && (
         <Button onClick={onCorrectionClick}>Correct expression</Button>

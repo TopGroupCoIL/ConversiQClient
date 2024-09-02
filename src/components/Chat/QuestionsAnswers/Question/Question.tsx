@@ -15,6 +15,8 @@ export const Question = ({ question, user }: QuestionProps) => {
   const questionValue =
     question.type === QuestionType.get_all
       ? 'Show all options'
+      : question.type === QuestionType.back
+      ? 'Back'
       : question.value || question.type;
 
   return (
