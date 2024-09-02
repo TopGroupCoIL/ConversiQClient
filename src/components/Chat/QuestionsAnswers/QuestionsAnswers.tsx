@@ -10,16 +10,25 @@ type QuestionsAnswersProps = {
   askQuestion: (question: QuestionType) => void;
   selectOption: (option: string) => void;
   onCorrectionClick: () => void;
+  clearChat: () => void;
 };
 
 export const QuestionsAnswers = (props: QuestionsAnswersProps) => {
-  const { chatHistory, askQuestion, selectOption, onCorrectionClick } = props;
+  const {
+    chatHistory,
+    askQuestion,
+    selectOption,
+    onCorrectionClick,
+    clearChat,
+  } = props;
 
   const { user } = useAuthContext();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const isAnswer = Object.keys(chatHistory[chatHistory.length - 1]).length == 2;
+  const isAnswer =
+    chatHistory[chatHistory.length - 1] &&
+    Object.keys(chatHistory[chatHistory.length - 1]).length == 2;
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -46,6 +55,7 @@ export const QuestionsAnswers = (props: QuestionsAnswersProps) => {
               askQuestion={askQuestion}
               selectOption={selectOption}
               onCorrectionClick={onCorrectionClick}
+              clearChat={clearChat}
             />
           </div>
         );

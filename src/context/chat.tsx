@@ -29,6 +29,7 @@ export interface IChatContext extends IChatState {
   setAnswer: (answer: Answer) => void;
   updateChatName: (newName: string) => void;
   saveChat: () => void;
+  clearChat: () => void;
   selectOption: (selectedItems: string) => void;
 }
 
@@ -42,6 +43,7 @@ export const SET_ANSWER = 'SET_ANSWER';
 export const UPDATE_CHAT_HISTORY = 'UPDATE_CHAT_HISTORY';
 export const UPDATE_CHAT_NAME = 'UPDATE_CHAT_NAME';
 export const SAVE_CHAT = 'SAVE_CHAT';
+export const CLEAR_CHAT = 'CLEAR_CHAT';
 
 export const SELECT_ITEM = 'SELECT_ITEM';
 
@@ -168,6 +170,15 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
         ...state,
         chats: [...state.chats, state.currentChat!],
       };
+    case CLEAR_CHAT: {
+      return {
+        ...state,
+        currentChat: {
+          ...state.currentChat!,
+          history: [],
+        },
+      };
+    }
     default:
       return state;
   }
@@ -218,6 +229,10 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     chatDispatch({ type: SAVE_CHAT, payload: null });
   }, []);
 
+  const clearChat = useCallback(() => {
+    chatDispatch({ type: CLEAR_CHAT, payload: null });
+  }, []);
+
   const contextValue = {
     ...chatState,
     isCurrentChatSaved,
@@ -227,6 +242,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     selectOption,
     updateChatName,
     saveChat,
+    clearChat,
   };
 
   return (

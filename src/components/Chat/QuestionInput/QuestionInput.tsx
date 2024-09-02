@@ -5,10 +5,15 @@ import { Question, QuestionType } from '../../../types';
 
 type QuestionInputProps = {
   isAsking: boolean;
+  isConversationGoingOn: boolean;
   ask: (question: Question) => Promise<boolean>;
 };
 
-export const QuestionInput = ({ isAsking, ask }: QuestionInputProps) => {
+export const QuestionInput = ({
+  isAsking,
+  isConversationGoingOn,
+  ask,
+}: QuestionInputProps) => {
   const [question, setQuestion] = useState('');
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,8 +21,12 @@ export const QuestionInput = ({ isAsking, ask }: QuestionInputProps) => {
   };
 
   const onEnterButtonClick = async () => {
+    const type = isConversationGoingOn
+      ? QuestionType.continue_conversation
+      : QuestionType.main_question;
+
     const isSuccess = await ask({
-      type: QuestionType.main_question,
+      type,
       value: question,
       parts: null,
     });

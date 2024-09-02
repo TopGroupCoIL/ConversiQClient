@@ -4,7 +4,13 @@ import { Template } from './Template';
 import { QuestionInput } from './QuestionInput';
 import { fetchData } from '../../api';
 import { useChat } from '../../context/chat';
-import { Answer, Question, QuestionPart, QuestionType } from '../../types';
+import {
+  Answer,
+  AnswerType,
+  Question,
+  QuestionPart,
+  QuestionType,
+} from '../../types';
 import { NameHeader } from './NameHeader';
 import { QuestionsAnswers } from './QuestionsAnswers';
 import { useModals } from '../../context/modals';
@@ -19,6 +25,7 @@ export const Chat = () => {
     updateChatName,
     saveChat,
     selectOption,
+    clearChat,
   } = useChat();
 
   const [isAsking, setAsking] = useState(false);
@@ -66,6 +73,15 @@ export const Chat = () => {
     openModal('UpdateChatNameModal');
   };
 
+  const isResultAnswer = !!(
+    currentChat &&
+    currentChat.history &&
+    currentChat.history[currentChat.history.length - 1] &&
+    currentChat.history[currentChat.history.length - 1].answer &&
+    currentChat.history[currentChat.history.length - 1].answer?.type ===
+      AnswerType.result
+  );
+
   return (
     <Flex
       vertical
@@ -87,6 +103,7 @@ export const Chat = () => {
             askQuestion={askQuestion}
             selectOption={selectOption}
             onCorrectionClick={onCorrectionClick}
+            clearChat={clearChat}
           />
         </div>
       ) : (
@@ -97,7 +114,11 @@ export const Chat = () => {
         align="center"
         className="absolute w-full h-32 bottom-0 bg-babyPowder"
       >
-        {<QuestionInput ask={askQuestion} isAsking={isAsking} />}
+        <QuestionInput
+          ask={askQuestion}
+          isAsking={isAsking}
+          isConversationGoingOn={isResultAnswer}
+        />
       </Flex>
     </Flex>
   );

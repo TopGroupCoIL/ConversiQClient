@@ -1,13 +1,22 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Flex, Image } from 'antd';
-import { Question as QuestionType, User } from '../../../../types';
+import {
+  Question as QuestionObjectType,
+  QuestionType,
+  User,
+} from '../../../../types';
 
 type QuestionProps = {
-  question: QuestionType;
+  question: QuestionObjectType;
   user: User | null;
 };
 
 export const Question = ({ question, user }: QuestionProps) => {
+  const questionValue =
+    question.type === QuestionType.get_all
+      ? 'Show all options'
+      : question.value || question.type;
+
   return (
     <Flex className="mb-4">
       <span>
@@ -34,7 +43,7 @@ export const Question = ({ question, user }: QuestionProps) => {
         )}
       </span>
       <div className="mt-[15px] ml-[15px] p-2.5 border border-solid border-[#737785] rounded-md bg-[#E6FCE1]">
-        {question.value || question.type}
+        {questionValue}
       </div>
     </Flex>
   );

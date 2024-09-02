@@ -16,6 +16,7 @@ type AnswerProps = {
   askQuestion: (question: Question) => void;
   onCorrectionClick: () => void;
   selectOption: (option: string) => void;
+  clearChat: () => void;
 };
 
 export const Answer = ({
@@ -24,6 +25,7 @@ export const Answer = ({
   askQuestion,
   onCorrectionClick,
   selectOption,
+  clearChat,
 }: AnswerProps) => {
   const isToolbarDisplayed =
     answer &&
@@ -66,11 +68,16 @@ export const Answer = ({
   };
 
   const onOptionSelect = (option: string) => {
-    selectOption(option);
-
     if (!answer) {
       return;
     }
+
+    if (answer.type === AnswerType.result) {
+      clearChat();
+      return;
+    }
+
+    selectOption(option);
 
     if (answer.multiSelection) {
       return;

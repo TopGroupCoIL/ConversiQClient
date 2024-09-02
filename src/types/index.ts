@@ -55,6 +55,7 @@ export enum QuestionType {
   found = 'found',
   correction = 'correction',
   cancel = 'cancel',
+  continue_conversation = 'continue_conversation',
 }
 
 export type QuestionPart = {
