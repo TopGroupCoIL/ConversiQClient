@@ -7,7 +7,7 @@ type BarProps = {
 };
 
 export const Bar = ({ grid }: BarProps) => {
-  const { rows, columns, data } = grid;
+  const { description, rows, columns, data } = grid;
 
   const datasets = rows.map((rowName, index) => ({
     label: rowName,
@@ -22,6 +22,10 @@ export const Bar = ({ grid }: BarProps) => {
   const options = {
     maintainAspectRatio: false,
     plugins: {
+      title: {
+        display: true,
+        text: description,
+      },
       legend: {
         labels: {
           usePointStyle: true,
