@@ -79,16 +79,21 @@ export const Answer = ({
 
     selectOption(option);
 
-    if (answer.multiSelection) {
+    if (
+      answer.multiSelection ||
+      (answer.showExpressionFound && answer.showNext)
+    ) {
       return;
     }
 
     if (answer.showExpressionFound) {
       onUseThisClick(option);
+      return;
     }
 
     if (answer.showNext) {
       onGoLowerClick(option);
+      return;
     }
   };
 

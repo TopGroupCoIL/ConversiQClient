@@ -1,3 +1,4 @@
+import { ConfigProvider } from 'antd';
 import { Chart, CategoryScale } from 'chart.js/auto';
 
 import { MainContent } from './components/MainContent/MainContent';
@@ -13,8 +14,16 @@ export const App = () => {
     <AuthProvider>
       <ModalsProvider>
         <ChatProvider>
-          <MainContent />
-          <Modals />
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: '#00b96b',
+              },
+            }}
+          >
+            <MainContent />
+            <Modals />
+          </ConfigProvider>
         </ChatProvider>
       </ModalsProvider>
     </AuthProvider>
