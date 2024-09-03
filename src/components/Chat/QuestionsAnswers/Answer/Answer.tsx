@@ -103,7 +103,7 @@ export const Answer = ({
         vertical
         justify="center"
         align="center"
-        className="w-[30px] h-[30px] border-2 border-solid border-black rounded-full text-center"
+        className="w-[30px] h-[30px] border-2 border-solid border-black rounded-full text-center font-bold"
       >
         C
       </Flex>

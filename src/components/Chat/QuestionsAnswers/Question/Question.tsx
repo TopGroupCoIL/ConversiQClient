@@ -19,6 +19,11 @@ export const Question = ({ question, user }: QuestionProps) => {
       ? 'Back'
       : question.value || question.type;
 
+  const userInitials = user?.name
+    .split(' ')
+    .map((name) => name[0])
+    .join('');
+
   return (
     <Flex className="mb-4">
       <span>
@@ -35,9 +40,9 @@ export const Question = ({ question, user }: QuestionProps) => {
               vertical
               justify="center"
               align="center"
-              className="w-[30px] h-[30px] border-2 border-solid border-black rounded-full text-center"
+              className="w-[30px] h-[30px] border-2 border-solid border-black rounded-full text-center font-bold bg-[#f6ffed]"
             >
-              {user.name[0]}
+              {userInitials}
             </Flex>
           )
         ) : (
