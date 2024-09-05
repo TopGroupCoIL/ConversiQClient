@@ -117,3 +117,13 @@ export type AnswerToolbar = {
   onUseThisClick: () => void;
   onGoLowerClick: () => void;
 };
+
+export enum DisplayType {
+  table = 'table',
+  bar = 'bar',
+}
+
+export enum ActionType {
+  share = 'share',
+  export = 'export',
+}

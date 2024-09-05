@@ -56,10 +56,6 @@ export const DataTable = ({ grid }: DataTableProps) => {
       }}
     >
       <Table
-        // size="small"
-        title={() => (
-          <span className="text-sm font-bold">{grid.description}</span>
-        )}
         columns={columns}
         dataSource={dataSource}
         pagination={false}

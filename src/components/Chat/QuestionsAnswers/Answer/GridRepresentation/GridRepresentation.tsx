@@ -1,23 +1,26 @@
 import { useState } from 'react';
-import { AnswerGrid } from '../../../../../types';
+import { ActionType, AnswerGrid, DisplayType } from '../../../../../types';
 import { DataTable } from './DataTable';
 import { Bar } from './Charts';
-import { Segmented } from 'antd';
-import { BarChartOutlined, TableOutlined } from '@ant-design/icons';
+import { GridHeader } from './GridHeader';
 
 type GridRepresentationProps = {
   grid: AnswerGrid;
 };
 
-enum DisplayType {
-  table = 'table',
-  bar = 'bar',
-}
-
 export const GridRepresentation = ({ grid }: GridRepresentationProps) => {
   const [displayType, setDisplayType] = useState<DisplayType>(
     DisplayType.table,
   );
+
+  const handleMenuItemClick = (key: string) => {
+    if (key === ActionType.share || key === ActionType.export) {
+      // to do
+      return;
+    }
+
+    setDisplayType(key as DisplayType);
+  };
 
   const renderData = () => {
     if (displayType === DisplayType.bar) {
@@ -28,18 +31,10 @@ export const GridRepresentation = ({ grid }: GridRepresentationProps) => {
   };
 
   return (
-    <div className="">
-      <Segmented
-        options={[
-          { value: DisplayType.table, icon: <TableOutlined /> },
-          { value: DisplayType.bar, icon: <BarChartOutlined /> },
-        ]}
-        value={displayType}
-        size="large"
-        className="mb-4"
-        onChange={(type: DisplayType) => {
-          setDisplayType(type);
-        }}
+    <div>
+      <GridHeader
+        dataDescription={grid.description}
+        onMenuItemClick={handleMenuItemClick}
       />
       <div className="relative max-w-screen-sm max-h-xs">{renderData()}</div>
     </div>
