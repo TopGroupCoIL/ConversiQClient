@@ -2,11 +2,12 @@ import { Button, Dropdown, Flex, MenuProps } from 'antd';
 import {
   BarChartOutlined,
   MoreOutlined,
-  ShareAltOutlined,
+  PieChartOutlined,
   TableOutlined,
-  UploadOutlined,
+  // ShareAltOutlined,
+  // UploadOutlined,
 } from '@ant-design/icons';
-import { ActionType, DisplayType } from '../../../../../../types';
+import { /* ActionType, */ DisplayType } from '../../../../../../types';
 
 type GridHeaderProps = {
   dataDescription: string;
@@ -39,24 +40,34 @@ export const GridHeader = ({
       key: DisplayType.bar,
     },
     {
-      type: 'divider',
-    },
-    {
       label: (
         <Flex justify="space-between" className="w-16">
-          Share <ShareAltOutlined />
+          Pie <PieChartOutlined />
         </Flex>
       ),
-      key: ActionType.share,
+      key: DisplayType.doughnut,
     },
-    {
-      label: (
-        <Flex justify="space-between" className="w-16">
-          Export <UploadOutlined />
-        </Flex>
-      ),
-      key: ActionType.export,
-    },
+    // {
+    //   type: 'divider',
+    // },
+    // {
+    //   label: (
+    //     <Flex justify="space-between" className="w-16">
+    //       Share <ShareAltOutlined />
+    //     </Flex>
+    //   ),
+    //   key: ActionType.share,
+    //   disabled: true,
+    // },
+    // {
+    //   label: (
+    //     <Flex justify="space-between" className="w-16">
+    //       Export <UploadOutlined />
+    //     </Flex>
+    //   ),
+    //   key: ActionType.export,
+    //   disabled: true,
+    // },
   ];
 
   const menuProps = {

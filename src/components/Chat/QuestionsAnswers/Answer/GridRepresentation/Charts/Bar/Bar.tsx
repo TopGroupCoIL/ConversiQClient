@@ -1,6 +1,7 @@
 import { Bar as BarChart } from 'react-chartjs-2';
-import { barColors } from '../../../../../../../const';
+import { chartColors } from '../../../../../../../const';
 import { AnswerGrid } from '../../../../../../../types';
+import { TooltipItem } from 'chart.js';
 
 type BarProps = {
   grid: AnswerGrid;
@@ -11,7 +12,7 @@ export const Bar = ({ grid }: BarProps) => {
 
   const datasets = rows.map((rowName, index) => ({
     label: rowName,
-    backgroundColor: barColors[index],
+    backgroundColor: chartColors[index],
     barPercentage: 0.5,
     borderRadius: 3,
     minBarLength: 10,
@@ -25,6 +26,16 @@ export const Bar = ({ grid }: BarProps) => {
       legend: {
         labels: {
           usePointStyle: true,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: TooltipItem<'bar'>) => {
+            const rowIndex = context.datasetIndex;
+            const columnIndex = context.dataIndex;
+
+            context.formattedValue = data[rowIndex][columnIndex].formattedValue;
+          },
         },
       },
     },

@@ -121,6 +121,7 @@ export type AnswerToolbar = {
 export enum DisplayType {
   table = 'table',
   bar = 'bar',
+  doughnut = 'doughnut',
 }
 
 export enum ActionType {

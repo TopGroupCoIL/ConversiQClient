@@ -33,6 +33,8 @@ export const Answer = ({
     answer.type !== AnswerType.end &&
     answer.type !== AnswerType.continue;
 
+  const isAnswerOptionsDisplayed = answer && answer.type !== AnswerType.result;
+
   const onShowAllClick = () => {
     askQuestion({ type: QuestionType.get_all, value: null, parts: null });
   };
@@ -118,14 +120,18 @@ export const Answer = ({
                 {<GridRepresentation grid={answer.grid} />}
               </div>
             )}
-            <div className="mb-2.5">{answer.question}</div>
+            {isAnswerOptionsDisplayed && (
+              <div className="mb-2.5">{answer.question}</div>
+            )}
             <Flex vertical>
-              <AnswerOptions
-                options={answer.options}
-                selectedOptions={answer.selected}
-                isLastAnswer={isLastAnswer}
-                selectOption={onOptionSelect}
-              />
+              {isAnswerOptionsDisplayed && (
+                <AnswerOptions
+                  options={answer.options}
+                  selectedOptions={answer.selected}
+                  isLastAnswer={isLastAnswer}
+                  selectOption={onOptionSelect}
+                />
+              )}
               {isToolbarDisplayed && (
                 <AnswerToolbar
                   isAsking={!answer}

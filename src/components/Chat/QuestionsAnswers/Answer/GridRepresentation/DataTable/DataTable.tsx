@@ -32,7 +32,7 @@ export const DataTable = ({ grid }: DataTableProps) => {
       new Map(
         grid.columns.map((column, columnIndex) => [
           column,
-          grid.data[rowIndex][columnIndex].value,
+          grid.data[rowIndex][columnIndex].formattedValue,
         ]),
       ),
     );

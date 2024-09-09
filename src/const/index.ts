@@ -12,7 +12,7 @@ export const ADMINISTRATION_USERS_PATH = 'users';
 export const ADMINISTRATION_SUPPORT_PATH = 'support';
 export const ADMINISTRATION_SETTINGS_PATH = 'settings';
 
-export const barColors = [
+export const chartColors = [
   '#4A76BA',
   '#73AACE',
   '#459D4E',

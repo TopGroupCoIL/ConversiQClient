@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ActionType, AnswerGrid, DisplayType } from '../../../../../types';
 import { DataTable } from './DataTable';
-import { Bar } from './Charts';
+import { Bar, Doughnut } from './Charts';
 import { GridHeader } from './GridHeader';
 
 type GridRepresentationProps = {
@@ -25,6 +25,10 @@ export const GridRepresentation = ({ grid }: GridRepresentationProps) => {
   const renderData = () => {
     if (displayType === DisplayType.bar) {
       return <Bar grid={grid} />;
+    }
+
+    if (displayType === DisplayType.doughnut) {
+      return <Doughnut grid={grid} />;
     }
 
     return <DataTable grid={grid} />;
