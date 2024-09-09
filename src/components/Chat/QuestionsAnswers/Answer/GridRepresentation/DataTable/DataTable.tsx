@@ -16,14 +16,14 @@ export const DataTable = ({ grid }: DataTableProps) => {
       title: '',
       dataIndex: 'name',
       key: 'name',
-      width: 100,
-      fixed: 'left',
+      width: 80,
+      ellipsis: true,
     },
     ...grid.columns.map((title) => ({
       title,
       dataIndex: title,
       key: title,
-      width: 100,
+      width: 120,
     })),
   ];
 
@@ -59,8 +59,8 @@ export const DataTable = ({ grid }: DataTableProps) => {
         columns={columns}
         dataSource={dataSource}
         pagination={false}
-        scroll={{ x: 640, y: 320 }}
         bordered
+        size="small"
       />
     </ConfigProvider>
   );
