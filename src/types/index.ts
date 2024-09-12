@@ -74,6 +74,7 @@ export enum AnswerType {
   result = 'result',
   end = 'end',
   continue = 'continue',
+  error = 'error',
 }
 
 export type AnswerGrid = {

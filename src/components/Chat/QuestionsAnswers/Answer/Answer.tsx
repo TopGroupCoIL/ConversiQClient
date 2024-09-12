@@ -161,6 +161,8 @@ export const Answer = ({
               )}
             </Flex>
           </>
+        ) : AnswerType.error ? (
+          <span>Sorry, unable to process your request</span>
         ) : (
           <span>End of conversation</span>
         )}

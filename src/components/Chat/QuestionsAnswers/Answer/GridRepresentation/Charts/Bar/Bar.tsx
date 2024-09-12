@@ -24,6 +24,7 @@ export const Bar = ({ grid }: BarProps) => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
+        position: 'right' as const,
         labels: {
           usePointStyle: true,
         },

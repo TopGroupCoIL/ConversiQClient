@@ -14,6 +14,7 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
   const defaultOptions = {
     plugins: {
       legend: {
+        position: 'right' as const,
         labels: {
           usePointStyle: true,
         },
@@ -58,7 +59,7 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
         };
 
         return (
-          <div className="w-1/2">
+          <div className={columns.length > 1 ? 'w-1/2' : 'w-full'}>
             <DoughnutChart
               options={options}
               data={{
