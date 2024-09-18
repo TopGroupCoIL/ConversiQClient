@@ -100,7 +100,11 @@ export const Answer = ({
   };
 
   return (
-    <Flex className="max-w-4/5">
+    <Flex
+      className={`${answer && 'w-full'} ${
+        answer && answer.grid ? 'max-w-full' : 'max-w-[600px]'
+      }`}
+    >
       <Flex
         vertical
         justify="center"
@@ -115,11 +119,7 @@ export const Answer = ({
         ) : answer.type === AnswerType.select_option ||
           (answer.type === AnswerType.result && answer.options) ? (
           <>
-            {answer.grid && (
-              <div className="m-2.5">
-                {<GridRepresentation grid={answer.grid} />}
-              </div>
-            )}
+            {answer.grid && <GridRepresentation grid={answer.grid} />}
             {isAnswerOptionsDisplayed && (
               <div className="mb-2.5">{answer.question}</div>
             )}

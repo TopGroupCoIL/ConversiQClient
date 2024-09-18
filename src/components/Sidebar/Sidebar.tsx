@@ -19,8 +19,7 @@ import { SavedChats } from './SavedChats';
 export const Sidebar = () => {
   const { user } = useAuthContext();
   const { openModal, setActiveItem } = useModals();
-  const { currentChat, /*isCurrentChatSaved*/ chats, startNewChat, saveChat } =
-    useChat();
+  const { currentChat, startNewChat, saveChat } = useChat();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -38,17 +37,6 @@ export const Sidebar = () => {
     setActiveItem({
       onLeave: () => {
         startNewChat();
-      },
-      saveChat,
-    });
-
-    openModal('CreateNewChatModal');
-  };
-
-  const onSavedChatClick = (chatName: string) => {
-    setActiveItem({
-      onLeave: () => {
-        startNewChat(chatName);
       },
       saveChat,
     });
@@ -186,12 +174,7 @@ export const Sidebar = () => {
         >
           {isAdministrationPage ? renderAdminItems() : renderDefaultItems()}
         </Flex>
-        <SavedChats
-          chats={chats}
-          currentChatName={currentChat?.name}
-          onChatClick={onSavedChatClick}
-          onDeleteChatClick={() => {}}
-        />
+        <SavedChats />
         <Flex
           vertical
           className="w-full h-32 mt-auto mb-16"

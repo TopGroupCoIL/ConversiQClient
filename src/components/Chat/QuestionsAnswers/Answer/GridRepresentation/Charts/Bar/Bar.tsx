@@ -16,6 +16,7 @@ export const Bar = ({ grid }: BarProps) => {
     barPercentage: 0.5,
     borderRadius: 3,
     minBarLength: 10,
+    maxBarThickness: 16,
     pointStyle: 'circle',
     data: data[index].map(({ value }) => value),
   }));
@@ -25,7 +26,10 @@ export const Bar = ({ grid }: BarProps) => {
     plugins: {
       legend: {
         position: 'right' as const,
+        align: 'start' as const,
         labels: {
+          align: 'start' as const,
+          padding: 15,
           usePointStyle: true,
         },
       },
@@ -43,8 +47,11 @@ export const Bar = ({ grid }: BarProps) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative min-h-80 min-w-80 overflow-auto">
       <BarChart
+        style={{
+          height: rows.length * 50,
+        }}
         options={options}
         data={{
           labels: columns,

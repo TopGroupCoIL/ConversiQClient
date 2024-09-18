@@ -19,6 +19,13 @@ export const App = () => {
               token: {
                 colorPrimary: '#00b96b',
               },
+              components: {
+                Table: {
+                  headerBg: '#E6FCE1',
+                  lineWidth: 1,
+                  borderColor: '#DBDBDB',
+                },
+              },
             }}
           >
             <MainContent />

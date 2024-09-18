@@ -12,6 +12,7 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
   const { rows, columns, data } = grid;
 
   const defaultOptions = {
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'right' as const,
@@ -29,7 +30,6 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
           {
             label: column,
             data: rows.map((_, rowIndex) => {
-              console.log(data[rowIndex][columnIndex]);
               return data[rowIndex][columnIndex].value;
             }),
             backgroundColor: chartColors,
@@ -61,6 +61,9 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
         return (
           <div className={columns.length > 1 ? 'w-1/2' : 'w-full'}>
             <DoughnutChart
+              style={{
+                height: columns.length * 50,
+              }}
               options={options}
               data={{
                 labels: rows,

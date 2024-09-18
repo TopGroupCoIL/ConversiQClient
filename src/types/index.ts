@@ -35,6 +35,11 @@ export type CustomerUser = {
   dataSources: string[];
 };
 
+export type SavedChat = {
+  id: string;
+  name: string;
+};
+
 export type Chat = {
   id: string;
   name: string;
@@ -48,6 +53,7 @@ export type ChatHistory = {
 };
 
 export enum QuestionType {
+  start = 'start',
   main_question = 'main_question',
   next = 'next',
   back = 'back',
@@ -70,6 +76,8 @@ export type Question = {
 };
 
 export enum AnswerType {
+  move_to_main = 'move_to_main',
+  restore_conversation = 'restore_conversation',
   select_option = 'select_option',
   result = 'result',
   end = 'end',

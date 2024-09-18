@@ -1,4 +1,4 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { Table, TableProps } from 'antd';
 import { AnswerGrid } from '../../../../../../types';
 
 type DataTableProps = {
@@ -16,8 +16,7 @@ export const DataTable = ({ grid }: DataTableProps) => {
       title: '',
       dataIndex: 'name',
       key: 'name',
-      width: 80,
-      ellipsis: true,
+      width: 150,
     },
     ...grid.columns.map((title) => ({
       title,
@@ -44,24 +43,13 @@ export const DataTable = ({ grid }: DataTableProps) => {
   });
 
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Table: {
-            headerBg: '#E6FCE1',
-            lineWidth: 1,
-            borderColor: '#DBDBDB',
-          },
-        },
-      }}
-    >
-      <Table
-        columns={columns}
-        dataSource={dataSource}
-        pagination={false}
-        bordered
-        size="small"
-      />
-    </ConfigProvider>
+    <Table
+      columns={columns}
+      dataSource={dataSource}
+      pagination={false}
+      bordered
+      tableLayout="fixed"
+      size="small"
+    />
   );
 };

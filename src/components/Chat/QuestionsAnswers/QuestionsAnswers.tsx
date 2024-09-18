@@ -41,23 +41,24 @@ export const QuestionsAnswers = (props: QuestionsAnswersProps) => {
       vertical
       align="flex-start"
       justify="flex-start"
-      className="h-full overflow-auto pr-16"
+      className="w-full h-full overflow-auto pr-16"
       ref={messagesEndRef}
     >
       {chatHistory.map(({ question, answer }, index) => {
         const isLastAnswer = chatHistory.length - 1 === index;
         return (
-          <div key={question.value}>
-            <Question question={question} user={user} />
+          <>
+            <Question question={question} user={user} key={question.value} />
             <Answer
               answer={answer}
               isLastAnswer={isLastAnswer}
+              key={index}
               askQuestion={askQuestion}
               selectOption={selectOption}
               onCorrectionClick={onCorrectionClick}
               clearChat={clearChat}
             />
-          </div>
+          </>
         );
       })}
       <div ref={messagesEndRef}></div>

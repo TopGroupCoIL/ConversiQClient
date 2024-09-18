@@ -35,12 +35,14 @@ export const GridRepresentation = ({ grid }: GridRepresentationProps) => {
   };
 
   return (
-    <div>
+    <div className="w-full h-full">
       <GridHeader
         dataDescription={grid.description}
         onMenuItemClick={handleMenuItemClick}
       />
-      <div className="relative max-w-screen-sm max-h-xs">{renderData()}</div>
+      <div className="relative w-full h-full max-w-full max-h-full overflow:auto">
+        {renderData()}
+      </div>
     </div>
   );
 };

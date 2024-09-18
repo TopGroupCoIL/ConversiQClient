@@ -14,20 +14,19 @@ export const AnswerOptions = ({
   selectOption,
 }: AnswerOptionsProps) => {
   return (
-    <Flex wrap gap="small" className="mb-8">
+    <Flex wrap justify="center" align="center" className="w-full">
       {options.map((option) => (
         <ConfigProvider
           key={option}
           theme={{
             token: {
-              colorPrimary: '#00b96b',
               colorBgContainer: '#f6ffed',
             },
           }}
         >
           <Button
             type={selectedOptions.includes(option) ? 'primary' : 'default'}
-            className="ml-2"
+            className="m-2"
             onClick={() => {
               if (isLastAnswer) {
                 selectOption(option);

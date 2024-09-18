@@ -11,6 +11,7 @@ import { Admin, QuestionPart } from '../types';
 
 const initialModalState = {
   showCreateNewChatModal: false,
+  showDeleteChatModal: false,
   showSaveChatModal: false,
   showUpdateChatNameModal: false,
   showCorrectExpressionModal: false,
@@ -27,8 +28,10 @@ interface IAction {
 type TActiveItem = {
   admin?: Admin;
   chatName?: string;
+  chatId?: string;
   onLeave?: (chatName?: string) => void;
   saveChat?: () => void;
+  deleteChat?: () => void;
   updateChatName?: (chatName: string) => void;
   correctExpression?: (parts: QuestionPart[]) => void;
 } | null;

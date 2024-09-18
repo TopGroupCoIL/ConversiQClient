@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Flex } from 'antd';
 import { Template } from './Template';
 import { QuestionInput } from './QuestionInput';
@@ -50,6 +50,26 @@ export const Chat = () => {
     return true;
   };
 
+  const checkLastConversation = async () => {
+    const res = await fetchData(
+      '/ask',
+      'POST',
+      JSON.stringify({ type: QuestionType.start, value: null, parts: null }),
+    );
+
+    const answer = (await res.json()) as Answer;
+
+    if (answer.type == AnswerType.select_option) {
+      return;
+    }
+  };
+
+  useEffect(() => {
+    if (!isAsking) {
+      checkLastConversation();
+    }
+  }, []);
+
   const onCorrectionClick = () => {
     const correctExpression = (parts: QuestionPart[]) => {
       askQuestion({ type: QuestionType.correction, value: null, parts });
@@ -61,12 +81,31 @@ export const Chat = () => {
   };
 
   const onSaveChat = () => {
-    currentChat && setActiveItem({ chatName: currentChat?.name, saveChat });
+    currentChat &&
+      setActiveItem({
+        chatName: currentChat?.name,
+        saveChat: async () => {
+          const res = await fetchData(
+            `/customers/chats/save/${currentChat.name}`,
+            'PUT',
+          );
+
+          if (res.ok) {
+            saveChat();
+          }
+        },
+      });
 
     openModal('SaveChatModal');
   };
 
   const onUpdateChatName = () => {
+    // const updateName = async (updatedName: string) => {
+    //   const res = fetchData(
+    //     `/customers/chats/${currentChat?.id}/caption/${updateName}`,
+    //   );
+    // };
+
     currentChat &&
       setActiveItem({ chatName: currentChat?.name, updateChatName });
 

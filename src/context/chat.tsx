@@ -4,22 +4,22 @@ import React, {
   useCallback,
   createContext,
 } from 'react';
-import { Answer, Chat, ChatHistory, Question } from '../types';
+import { Answer, Chat, ChatHistory, Question, SavedChat } from '../types';
 
 type IChatState = {
   currentChat: Chat | null;
   isCurrentChatSaved: boolean;
-  chats: Chat[];
+  savedChats: SavedChat[];
 };
 
 const initialChatState = {
   currentChat: null,
   isCurrentChatSaved: false,
-  chats: [],
+  savedChats: [],
 };
 
 interface IAction {
-  payload: Question | Answer | ChatHistory | string | null;
+  payload: Question | Answer | ChatHistory | SavedChat[] | string | null;
   type: string;
 }
 
@@ -29,6 +29,8 @@ export interface IChatContext extends IChatState {
   setAnswer: (answer: Answer) => void;
   updateChatName: (newName: string) => void;
   saveChat: () => void;
+  setSavedChats: (savedChats: SavedChat[]) => void;
+  deleteSavedChat: (chatId: string) => void;
   clearChat: () => void;
   selectOption: (selectedItems: string) => void;
 }
@@ -43,6 +45,8 @@ export const SET_ANSWER = 'SET_ANSWER';
 export const UPDATE_CHAT_HISTORY = 'UPDATE_CHAT_HISTORY';
 export const UPDATE_CHAT_NAME = 'UPDATE_CHAT_NAME';
 export const SAVE_CHAT = 'SAVE_CHAT';
+export const SET_SAVED_CHATS = 'SET_SAVED_CHATS';
+export const DELETE_SAVED_CHAT = 'DELETE_SAVED_CHAT';
 export const CLEAR_CHAT = 'CLEAR_CHAT';
 
 export const SELECT_ITEM = 'SELECT_ITEM';
@@ -58,7 +62,7 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
 
       return {
         ...state,
-        currentChat: state.chats.find((chat) => chat.name === chatName)!,
+        // currentChat: state.savedChats.find((chat) => chat.name === chatName)!,
       };
     }
     case SET_QUESTION: {
@@ -156,7 +160,7 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
       return {
         ...state,
         currentChat: { ...state.currentChat!, name },
-        chats: state.chats.map((chat) => {
+        savedChats: state.savedChats.map((chat) => {
           if (chat.name === state.currentChat?.name) {
             return { ...chat, name };
           }
@@ -168,8 +172,24 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
     case SAVE_CHAT:
       return {
         ...state,
-        chats: [...state.chats, state.currentChat!],
+        savedChats: [...state.savedChats, state.currentChat!],
       };
+    case SET_SAVED_CHATS: {
+      const savedChats = action.payload as SavedChat[];
+
+      return {
+        ...state,
+        savedChats,
+      };
+    }
+    case DELETE_SAVED_CHAT: {
+      const chatId = action.payload as string;
+
+      return {
+        ...state,
+        savedChats: state.savedChats.filter(({ id }) => id != chatId),
+      };
+    }
     case CLEAR_CHAT: {
       return {
         ...state,
@@ -198,7 +218,9 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
   const isCurrentChatSaved =
     !!chatState.currentChat &&
-    !!chatState.chats.find((chat) => chat.name === chatState.currentChat?.name);
+    !!chatState.savedChats.find(
+      (chat) => chat.name === chatState.currentChat?.name,
+    );
 
   const startNewChat = useCallback((chatName?: string) => {
     chatDispatch({ type: START_NEW_CHAT, payload: chatName || null });
@@ -229,6 +251,14 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     chatDispatch({ type: SAVE_CHAT, payload: null });
   }, []);
 
+  const setSavedChats = useCallback((savedChats: SavedChat[]) => {
+    chatDispatch({ type: SET_SAVED_CHATS, payload: savedChats });
+  }, []);
+
+  const deleteSavedChat = useCallback((chatId: string) => {
+    chatDispatch({ type: DELETE_SAVED_CHAT, payload: chatId });
+  }, []);
+
   const clearChat = useCallback(() => {
     chatDispatch({ type: CLEAR_CHAT, payload: null });
   }, []);
@@ -242,6 +272,8 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     selectOption,
     updateChatName,
     saveChat,
+    deleteSavedChat,
+    setSavedChats,
     clearChat,
   };
 
