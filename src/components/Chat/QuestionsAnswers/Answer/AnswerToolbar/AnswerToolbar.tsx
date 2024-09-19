@@ -23,22 +23,38 @@ export const AnswerToolbar = ({
       justify="center"
       align="center"
     >
-      {showAll && <Button onClick={onShowAllClick}>Show all options</Button>}
-      {showBack && <Button onClick={onBackClick}>Back</Button>}
+      {showUseThis && (
+        <Button
+          className="w-44"
+          disabled={disableExpressionFound}
+          onClick={onUseThisClick}
+        >
+          Use the selected items
+        </Button>
+      )}
+      {showGoLower && (
+        <Button
+          className="w-44"
+          disabled={disableExpressionFound}
+          onClick={onGoLowerClick}
+        >
+          Go to lower level
+        </Button>
+      )}
+      {showBack && (
+        <Button className="w-44" onClick={onBackClick}>
+          Go to higher level
+        </Button>
+      )}
+      {showAll && (
+        <Button className="w-44" onClick={onShowAllClick}>
+          Show all options
+        </Button>
+      )}
       {/* {showCancel && <Button onClick={onCancelClick}>Cancel</Button>} */}
       {/* {showCorrectExpression && (
         <Button onClick={onCorrectionClick}>Correct expression</Button>
       )} */}
-      {showUseThis && (
-        <Button disabled={disableExpressionFound} onClick={onUseThisClick}>
-          Use this
-        </Button>
-      )}
-      {showGoLower && (
-        <Button disabled={disableExpressionFound} onClick={onGoLowerClick}>
-          Go lower here
-        </Button>
-      )}
     </Flex>
   );
 };
