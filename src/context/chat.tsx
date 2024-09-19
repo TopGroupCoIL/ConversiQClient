@@ -109,11 +109,27 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
         };
       }
 
+      const history = state.currentChat.history.map((val, index) => {
+        if (index !== state.currentChat!.history.length - 1) {
+          return val;
+        }
+
+        return {
+          ...val,
+          answer: val.answer
+            ? {
+                ...val.answer,
+                selectedQuestionType: question.type,
+              }
+            : undefined,
+        };
+      });
+
       return {
         ...state,
         currentChat: {
           ...state.currentChat,
-          history: [...state.currentChat.history, { question }],
+          history: [...history, { question }],
         },
       };
     }

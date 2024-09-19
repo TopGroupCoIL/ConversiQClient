@@ -100,6 +100,7 @@ export type Answer = {
   options: string[];
   history: ChatHistory[];
   selected: string[];
+  selectedQuestionType: QuestionType | null;
   multiSelection: boolean;
   showNext: boolean;
   showBack: boolean;
@@ -114,6 +115,8 @@ export type Answer = {
 
 export type AnswerToolbar = {
   isAsking: boolean;
+  isDisabled: boolean;
+  selectedQuestionType: QuestionType | null;
   showAll?: boolean;
   showBack?: boolean;
   showCancel?: boolean;

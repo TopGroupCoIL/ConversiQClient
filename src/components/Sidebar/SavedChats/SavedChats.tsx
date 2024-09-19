@@ -71,12 +71,15 @@ export const SavedChats = () => {
           index !== answer.history.length - 1
             ? answer.history[index + 1].question.value?.split('|') || []
             : [];
+        const selectedQuestionType =
+          answer.history[index + 1]?.question.type || null;
 
         return {
           ...val,
           answer: {
             ...val.answer,
             selected,
+            selectedQuestionType,
           },
         };
       }) as ChatHistory[],

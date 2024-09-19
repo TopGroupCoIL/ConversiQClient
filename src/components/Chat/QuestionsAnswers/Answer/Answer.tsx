@@ -29,7 +29,6 @@ export const Answer = ({
 }: AnswerProps) => {
   const isToolbarDisplayed =
     answer &&
-    isLastAnswer &&
     answer.type !== AnswerType.end &&
     answer.type !== AnswerType.continue;
 
@@ -135,6 +134,8 @@ export const Answer = ({
               {isToolbarDisplayed && (
                 <AnswerToolbar
                   isAsking={!answer}
+                  isDisabled={!isLastAnswer}
+                  selectedQuestionType={answer.selectedQuestionType}
                   showAll={answer.showAll}
                   showBack={answer.showBack}
                   showCancel={answer.showCancel}

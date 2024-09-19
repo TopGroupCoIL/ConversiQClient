@@ -1,7 +1,12 @@
 import { Button, Flex } from 'antd';
-import { AnswerToolbar as AnswerToolbarProps } from '../../../../../types';
+import {
+  AnswerToolbar as AnswerToolbarProps,
+  QuestionType,
+} from '../../../../../types';
 
 export const AnswerToolbar = ({
+  isDisabled,
+  selectedQuestionType,
   showAll,
   showBack,
   // showCancel,
@@ -26,8 +31,11 @@ export const AnswerToolbar = ({
       {showUseThis && (
         <Button
           className="w-44"
-          disabled={disableExpressionFound}
-          onClick={onUseThisClick}
+          disabled={
+            (!isDisabled && disableExpressionFound) ||
+            QuestionType.found === selectedQuestionType
+          }
+          onClick={!isDisabled ? onUseThisClick : undefined}
         >
           Use the selected items
         </Button>
@@ -35,19 +43,31 @@ export const AnswerToolbar = ({
       {showGoLower && (
         <Button
           className="w-44"
-          disabled={disableExpressionFound}
-          onClick={onGoLowerClick}
+          disabled={
+            (!isDisabled && disableExpressionFound) ||
+            QuestionType.next === selectedQuestionType
+          }
+          onClick={!isDisabled ? onGoLowerClick : undefined}
         >
           Go to lower level
         </Button>
       )}
       {showBack && (
-        <Button className="w-44" onClick={onBackClick}>
+        <Button
+          className="w-44"
+          disabled={QuestionType.back === selectedQuestionType}
+          onClick={!isDisabled ? onBackClick : undefined}
+        >
           Go to higher level
         </Button>
       )}
       {showAll && (
-        <Button className="w-44" onClick={onShowAllClick}>
+        <Button
+          type="default"
+          className="w-44"
+          onClick={!isDisabled ? onShowAllClick : undefined}
+          disabled={QuestionType.get_all === selectedQuestionType}
+        >
           Show all options
         </Button>
       )}
