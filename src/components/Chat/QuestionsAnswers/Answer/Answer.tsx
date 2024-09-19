@@ -102,7 +102,7 @@ export const Answer = ({
   return (
     <Flex
       className={`${answer && 'w-full'} ${
-        answer && answer.grid ? 'max-w-full' : 'max-w-[600px]'
+        answer && answer.grid ? 'max-w-full' : 'max-w-5xl'
       }`}
     >
       <Flex
