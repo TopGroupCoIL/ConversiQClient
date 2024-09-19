@@ -61,9 +61,6 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
         return (
           <div className={columns.length > 1 ? 'w-1/2' : 'w-full'}>
             <DoughnutChart
-              style={{
-                height: columns.length * 50,
-              }}
               options={options}
               data={{
                 labels: rows,

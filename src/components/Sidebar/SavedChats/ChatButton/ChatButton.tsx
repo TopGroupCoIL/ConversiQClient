@@ -1,4 +1,4 @@
-import { Button, Space } from 'antd';
+import { Button, Popover, Typography } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
 type ChatButtonProps = {
@@ -15,14 +15,25 @@ export const ChatButton = ({
   onDeleteButtonClick,
 }: ChatButtonProps) => {
   return (
-    <Space>
+    <Popover
+      placement="right"
+      content={
+        <Button
+          danger
+          icon={<DeleteOutlined />}
+          onClick={onDeleteButtonClick}
+        />
+      }
+    >
       <Button
-        type={isSelected ? 'primary' : 'default'}
+        type={isSelected ? 'default' : 'text'}
+        className="w-full"
         onClick={onChatButtonClick}
       >
-        {chatName}
+        <Typography.Text className="w-full" ellipsis>
+          {chatName}
+        </Typography.Text>
       </Button>
-      <Button icon={<DeleteOutlined />} onClick={onDeleteButtonClick} />
-    </Space>
+    </Popover>
   );
 };

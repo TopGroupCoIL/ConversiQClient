@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Flex } from 'antd';
+import { Flex, Spin } from 'antd';
 import { Template } from './Template';
 import { QuestionInput } from './QuestionInput';
 import { fetchData } from '../../api';
@@ -20,6 +20,7 @@ export const Chat = () => {
 
   const {
     currentChat,
+    isLoading,
     setQuestion,
     setAnswer,
     updateChatName,
@@ -100,14 +101,22 @@ export const Chat = () => {
   };
 
   const onUpdateChatName = () => {
-    // const updateName = async (updatedName: string) => {
-    //   const res = fetchData(
-    //     `/customers/chats/${currentChat?.id}/caption/${updateName}`,
-    //   );
-    // };
+    const updateName = async (updatedName: string) => {
+      const res = await fetchData(
+        `/customers/chats/${currentChat?.id}/caption/${updatedName}`,
+        'PUT',
+      );
+
+      if (res.ok) {
+        updateChatName(updatedName);
+      }
+    };
 
     currentChat &&
-      setActiveItem({ chatName: currentChat?.name, updateChatName });
+      setActiveItem({
+        chatName: currentChat?.name,
+        updateChatName: updateName,
+      });
 
     openModal('UpdateChatNameModal');
   };
@@ -120,6 +129,14 @@ export const Chat = () => {
     currentChat.history[currentChat.history.length - 1].answer?.type ===
       AnswerType.result
   );
+
+  if (isLoading) {
+    return (
+      <Flex justify="center" align="center" className="w-full h-full">
+        <Spin size="large" />
+      </Flex>
+    );
+  }
 
   return (
     <Flex

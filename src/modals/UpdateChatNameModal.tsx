@@ -45,9 +45,16 @@ export const UpdateChatNameModal = () => {
   const { showUpdateChatNameModal, closeModal, activeItem } = useModals();
 
   const [form] = Form.useForm();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onFinish = async (values: FieldType) => {
-    activeItem?.updateChatName && activeItem.updateChatName(values.chatName);
+    if (activeItem?.updateChatName) {
+      setIsSubmitting(true);
+
+      await activeItem.updateChatName(values.chatName);
+
+      setIsSubmitting(false);
+    }
 
     closeModal();
   };
@@ -69,7 +76,7 @@ export const UpdateChatNameModal = () => {
         onFinish={onFinish}
         preserve={false}
         initialValues={{
-          ['chatName']: activeItem?.chatName ? activeItem.chatName : '',
+          chatName: activeItem?.chatName ? activeItem.chatName : '',
         }}
       >
         <Form.Item
@@ -85,7 +92,9 @@ export const UpdateChatNameModal = () => {
           <Input placeholder="Chat name" />
         </Form.Item>
         <Form.Item>
-          <SubmitButton form={form}>Update</SubmitButton>
+          <SubmitButton form={form} isLoading={isSubmitting}>
+            Update
+          </SubmitButton>
         </Form.Item>
       </Form>
     </Modal>

@@ -115,7 +115,7 @@ export const Answer = ({
       </Flex>
       <div className="w-[calc(100%-50px)] mt-[15px] ml-[15px] p-2.5 border border-solid border-[#737785] rounded-md bg-white">
         {!answer ? (
-          <LoadingOutlined />
+          <LoadingOutlined className="mx-auto" />
         ) : answer.type === AnswerType.select_option ||
           (answer.type === AnswerType.result && answer.options) ? (
           <>

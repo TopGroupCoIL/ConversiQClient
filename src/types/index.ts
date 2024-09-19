@@ -62,6 +62,7 @@ export enum QuestionType {
   correction = 'correction',
   cancel = 'cancel',
   continue_conversation = 'continue_conversation',
+  restore_conversation = 'restore_conversation',
 }
 
 export type QuestionPart = {
@@ -97,6 +98,7 @@ export type Answer = {
   question: string;
   target: null;
   options: string[];
+  history: ChatHistory[];
   selected: string[];
   multiSelection: boolean;
   showNext: boolean;

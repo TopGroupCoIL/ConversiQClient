@@ -7,23 +7,35 @@ import React, {
 import { Answer, Chat, ChatHistory, Question, SavedChat } from '../types';
 
 type IChatState = {
+  isLoading: boolean;
   currentChat: Chat | null;
   isCurrentChatSaved: boolean;
   savedChats: SavedChat[];
 };
 
 const initialChatState = {
+  isLoading: false,
   currentChat: null,
   isCurrentChatSaved: false,
   savedChats: [],
 };
 
 interface IAction {
-  payload: Question | Answer | ChatHistory | SavedChat[] | string | null;
+  payload:
+    | Question
+    | Answer
+    | ChatHistory
+    | Chat
+    | SavedChat[]
+    | string
+    | boolean
+    | null;
   type: string;
 }
 
 export interface IChatContext extends IChatState {
+  setChatLoading: (isLoading: boolean) => void;
+  setCurrentChat: (chat: Chat) => void;
   startNewChat: (chatName?: string) => void;
   setQuestion: (question: Question) => void;
   setAnswer: (answer: Answer) => void;
@@ -39,6 +51,8 @@ const ChatContext = createContext<IChatContext | null>(null);
 
 export const CONTEXT_ERROR_MESSAGE = 'useChat must be used within ChatProvider';
 
+export const SET_CHAT_LOADING = 'SET_CHAT_LOADING';
+export const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT';
 export const START_NEW_CHAT = 'START_NEW_CHAT';
 export const SET_QUESTION = 'SET_QUESTION';
 export const SET_ANSWER = 'SET_ANSWER';
@@ -53,6 +67,22 @@ export const SELECT_ITEM = 'SELECT_ITEM';
 
 const chatReducer = (state: IChatState, action: IAction): IChatState => {
   switch (action.type) {
+    case SET_CHAT_LOADING: {
+      const isLoading = action.payload as boolean;
+
+      return {
+        ...state,
+        isLoading,
+      };
+    }
+    case SET_CURRENT_CHAT: {
+      const chat = action.payload as Chat;
+
+      return {
+        ...state,
+        currentChat: chat,
+      };
+    }
     case START_NEW_CHAT: {
       const chatName = action.payload;
 
@@ -187,6 +217,8 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
 
       return {
         ...state,
+        currentChat:
+          state.currentChat?.id === chatId ? null : state.currentChat,
         savedChats: state.savedChats.filter(({ id }) => id != chatId),
       };
     }
@@ -221,6 +253,14 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     !!chatState.savedChats.find(
       (chat) => chat.name === chatState.currentChat?.name,
     );
+
+  const setChatLoading = useCallback((isLoading: boolean) => {
+    chatDispatch({ type: SET_CHAT_LOADING, payload: isLoading });
+  }, []);
+
+  const setCurrentChat = useCallback((chat: Chat) => {
+    chatDispatch({ type: SET_CURRENT_CHAT, payload: chat });
+  }, []);
 
   const startNewChat = useCallback((chatName?: string) => {
     chatDispatch({ type: START_NEW_CHAT, payload: chatName || null });
@@ -266,6 +306,8 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const contextValue = {
     ...chatState,
     isCurrentChatSaved,
+    setChatLoading,
+    setCurrentChat,
     startNewChat,
     setQuestion,
     setAnswer,
