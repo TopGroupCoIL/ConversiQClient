@@ -10,6 +10,7 @@ import {
   Question,
   QuestionPart,
   QuestionType,
+  SavedChat,
 } from '../../types';
 import { NameHeader } from './NameHeader';
 import { QuestionsAnswers } from './QuestionsAnswers';
@@ -92,7 +93,9 @@ export const Chat = () => {
           );
 
           if (res.ok) {
-            saveChat();
+            const savedChat = (await res.json()) as SavedChat;
+
+            saveChat(savedChat);
           }
         },
       });
@@ -148,6 +151,7 @@ export const Chat = () => {
       {currentChat && (
         <NameHeader
           initialChatName={currentChat.name}
+          isHistorySaved={currentChat.isHistorySaved}
           onUpdateName={onUpdateChatName}
           onSaveChat={onSaveChat}
         />

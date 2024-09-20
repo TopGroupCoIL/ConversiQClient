@@ -15,6 +15,8 @@ import { ADMINISTRATION_PATH } from '../../const';
 import { useChat } from '../../context/chat';
 import { useModals } from '../../context/modals';
 import { SavedChats } from './SavedChats';
+import { fetchData } from '../../api';
+import { SavedChat } from '../../types';
 
 export const Sidebar = () => {
   const { user } = useAuthContext();
@@ -35,10 +37,22 @@ export const Sidebar = () => {
 
   const onNew = () => {
     setActiveItem({
+      isHistorySaved: !!currentChat?.isHistorySaved,
       onLeave: () => {
         startNewChat();
       },
-      saveChat,
+      saveChat: async () => {
+        const res = await fetchData(
+          `/customers/chats/save/${currentChat!.name}`,
+          'PUT',
+        );
+
+        if (res.ok) {
+          const savedChat = (await res.json()) as SavedChat;
+
+          saveChat(savedChat);
+        }
+      },
     });
 
     openModal('CreateNewChatModal');

@@ -31,17 +31,8 @@ export const CreateNewChatModal = () => {
     closeModal();
   };
 
-  return (
-    <Modal
-      open={showCreateNewChatModal}
-      key={
-        showCreateNewChatModal
-          ? 'openCreateNewChatModal'
-          : 'closedCreateNewChatModal'
-      }
-      onCancel={() => closeModal()}
-      title="New conversation"
-      footer={[
+  const footer = !activeItem?.isHistorySaved
+    ? [
         <Button key="cancel" onClick={onCancel}>
           Cancel
         </Button>,
@@ -56,7 +47,27 @@ export const CreateNewChatModal = () => {
         <Button key="link" type="primary" onClick={onLeave}>
           Leave
         </Button>,
-      ]}
+      ]
+    : [
+        <Button key="cancel" onClick={onCancel}>
+          Cancel
+        </Button>,
+        <Button key="link" type="primary" onClick={onLeave}>
+          Leave
+        </Button>,
+      ];
+
+  return (
+    <Modal
+      open={showCreateNewChatModal}
+      key={
+        showCreateNewChatModal
+          ? 'openCreateNewChatModal'
+          : 'closedCreateNewChatModal'
+      }
+      onCancel={() => closeModal()}
+      title="New conversation"
+      footer={footer}
     >
       <p>Do you want to leave current chat?</p>
     </Modal>

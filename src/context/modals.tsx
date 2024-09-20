@@ -29,6 +29,7 @@ type TActiveItem = {
   admin?: Admin;
   chatName?: string;
   chatId?: string;
+  isHistorySaved?: boolean;
   onLeave?: (chatName?: string) => void;
   saveChat?: () => void;
   deleteChat?: () => void;

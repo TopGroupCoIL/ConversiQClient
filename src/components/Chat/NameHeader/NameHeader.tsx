@@ -3,12 +3,14 @@ import { ConfigProvider, Dropdown, Flex, MenuProps } from 'antd';
 
 type NameHeaderProps = {
   initialChatName: string;
+  isHistorySaved: boolean;
   onUpdateName: () => void;
   onSaveChat: () => void;
 };
 
 export const NameHeader = ({
   initialChatName,
+  isHistorySaved,
   onUpdateName,
   onSaveChat,
 }: NameHeaderProps) => {
@@ -20,10 +22,11 @@ export const NameHeader = ({
     }
   };
 
-  const items = [
+  const items: MenuProps['items'] = [
     {
       key: 'save',
       label: 'Save',
+      disabled: isHistorySaved,
     },
     {
       key: 'editName',

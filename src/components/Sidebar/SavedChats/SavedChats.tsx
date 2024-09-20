@@ -84,6 +84,7 @@ export const SavedChats = () => {
         };
       }) as ChatHistory[],
       name: savedChat.name,
+      isHistorySaved: true,
     });
 
     setChatLoading(false);

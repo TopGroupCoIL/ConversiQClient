@@ -9,14 +9,12 @@ import { Answer, Chat, ChatHistory, Question, SavedChat } from '../types';
 type IChatState = {
   isLoading: boolean;
   currentChat: Chat | null;
-  isCurrentChatSaved: boolean;
   savedChats: SavedChat[];
 };
 
 const initialChatState = {
   isLoading: false,
   currentChat: null,
-  isCurrentChatSaved: false,
   savedChats: [],
 };
 
@@ -26,6 +24,7 @@ interface IAction {
     | Answer
     | ChatHistory
     | Chat
+    | SavedChat
     | SavedChat[]
     | string
     | boolean
@@ -40,7 +39,7 @@ export interface IChatContext extends IChatState {
   setQuestion: (question: Question) => void;
   setAnswer: (answer: Answer) => void;
   updateChatName: (newName: string) => void;
-  saveChat: () => void;
+  saveChat: (savedChat: SavedChat) => void;
   setSavedChats: (savedChats: SavedChat[]) => void;
   deleteSavedChat: (chatId: string) => void;
   clearChat: () => void;
@@ -56,7 +55,6 @@ export const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT';
 export const START_NEW_CHAT = 'START_NEW_CHAT';
 export const SET_QUESTION = 'SET_QUESTION';
 export const SET_ANSWER = 'SET_ANSWER';
-export const UPDATE_CHAT_HISTORY = 'UPDATE_CHAT_HISTORY';
 export const UPDATE_CHAT_NAME = 'UPDATE_CHAT_NAME';
 export const SAVE_CHAT = 'SAVE_CHAT';
 export const SET_SAVED_CHATS = 'SET_SAVED_CHATS';
@@ -105,6 +103,7 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
             id: 'newChat',
             name: question.value!,
             history: [{ question }],
+            isHistorySaved: false,
           },
         };
       }
@@ -130,6 +129,7 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
         currentChat: {
           ...state.currentChat,
           history: [...history, { question }],
+          isHistorySaved: false,
         },
       };
     }
@@ -153,17 +153,6 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
         },
       };
     }
-    case UPDATE_CHAT_HISTORY:
-      return {
-        ...state,
-        currentChat: {
-          id: 'newChat',
-          name: 'New chat',
-          history: state.currentChat
-            ? [...state.currentChat.history, action.payload as ChatHistory]
-            : [action.payload as ChatHistory],
-        },
-      };
     case SELECT_ITEM: {
       const selectedOption = action.payload as string;
 
@@ -215,11 +204,22 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
         }),
       };
     }
-    case SAVE_CHAT:
+    case SAVE_CHAT: {
+      const savedChat = action.payload as SavedChat;
+
       return {
         ...state,
-        savedChats: [...state.savedChats, state.currentChat!],
+        currentChat: {
+          ...state.currentChat!,
+          name: savedChat.name,
+          id: savedChat.id,
+          isHistorySaved: true,
+        },
+        savedChats: state.savedChats.find(({ id }) => id === savedChat.id)
+          ? state.savedChats
+          : [...state.savedChats, savedChat],
       };
+    }
     case SET_SAVED_CHATS: {
       const savedChats = action.payload as SavedChat[];
 
@@ -255,19 +255,10 @@ const chatReducer = (state: IChatState, action: IAction): IChatState => {
 export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const [chatState, chatDispatch] = useReducer(chatReducer, initialChatState);
 
-  // const updateChatHistory = useCallback(
-  //   (chatHistory: ChatHistory) =>
-  //     chatDispatch({
-  //       type: UPDATE_CHAT_HISTORY,
-  //       payload: chatHistory,
-  //
-  //   [],
-  // );
-
   const isCurrentChatSaved =
     !!chatState.currentChat &&
     !!chatState.savedChats.find(
-      (chat) => chat.name === chatState.currentChat?.name,
+      (chat) => chat.id === chatState.currentChat?.id,
     );
 
   const setChatLoading = useCallback((isLoading: boolean) => {
@@ -303,8 +294,8 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     [],
   );
 
-  const saveChat = useCallback(() => {
-    chatDispatch({ type: SAVE_CHAT, payload: null });
+  const saveChat = useCallback((savedChat: SavedChat) => {
+    chatDispatch({ type: SAVE_CHAT, payload: savedChat });
   }, []);
 
   const setSavedChats = useCallback((savedChats: SavedChat[]) => {
