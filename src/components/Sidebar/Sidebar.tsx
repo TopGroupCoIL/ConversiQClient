@@ -186,7 +186,7 @@ export const Sidebar = () => {
         <SavedChats />
         <Flex
           vertical
-          className="w-full h-32 mt-8 mb-10"
+          className="w-full h-32 mt-8 mb-10 self-end"
           justify="space-between"
           align={collapsed ? 'center' : 'flex-start'}
         >
