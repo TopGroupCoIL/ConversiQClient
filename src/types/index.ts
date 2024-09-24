@@ -92,6 +92,7 @@ export type AnswerGrid = {
   columns: string[];
   rows: string[];
   data: { formattedValue: string; value: string }[][];
+  cornerInfo?: string;
 };
 
 export type Answer = {

@@ -13,7 +13,7 @@ interface DataType {
 export const DataTable = ({ grid }: DataTableProps) => {
   const columns: TableProps<DataType>['columns'] = [
     {
-      title: '',
+      title: grid.cornerInfo || '',
       dataIndex: 'name',
       key: 'name',
       width: 150,
