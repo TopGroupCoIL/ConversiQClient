@@ -169,12 +169,7 @@ export const Sidebar = () => {
       width={240}
       collapsed={collapsed}
     >
-      <Flex
-        justify={collapsed ? 'center' : 'flex-start'}
-        align="center"
-        vertical
-        className="h-full"
-      >
+      <div className="w-full h-full grid grid-cols-1 grid-rows-[auto_auto_1fr_auto]">
         <SideBarHeader isSidebarCollapsed={collapsed} />
         {/* <Button
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -182,7 +177,7 @@ export const Sidebar = () => {
         /> */}
         <Flex
           vertical
-          className="w-full h-20 mt-4 mb-4"
+          className="w-full h-20 mb-4"
           justify="space-between"
           align={collapsed ? 'center' : 'flex-start'}
         >
@@ -191,14 +186,14 @@ export const Sidebar = () => {
         <SavedChats />
         <Flex
           vertical
-          className="w-full h-32 mt-auto mb-16"
+          className="w-full h-32 mt-8 mb-10"
           justify="space-between"
           align={collapsed ? 'center' : 'flex-start'}
         >
           {renderBottomItems()}
           <UserDropdown isSidebarCollapsed={collapsed} />
         </Flex>
-      </Flex>
+      </div>
     </Layout.Sider>
   );
 };

@@ -105,7 +105,10 @@ export const SavedChats = () => {
   };
 
   return (
-    <Flex className="w-full [&>*:not(:last-child)]:mb-4" vertical>
+    <Flex
+      className="w-full h-full overflow-auto [&>*:not(:last-child)]:mb-4 scrolled"
+      vertical
+    >
       {savedChats.map((chat) => (
         <ChatButton
           key={chat.name}

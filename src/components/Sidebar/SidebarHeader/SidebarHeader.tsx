@@ -6,8 +6,8 @@ type SideBarHeaderProps = {
 
 export const SideBarHeader = ({ isSidebarCollapsed }: SideBarHeaderProps) => {
   return (
-    <Flex>
-      <span className="text-4xl text-center mt-4 mb-8">
+    <Flex justify="center" align="center" className="mb-8">
+      <span className="text-4xl text-center">
         {isSidebarCollapsed ? 'CQ' : 'ConversiQ'}
       </span>
     </Flex>
