@@ -43,7 +43,7 @@ export const ChatButton = ({
         onClick={onChatButtonClick}
         ref={buttonRef}
       >
-        <Typography.Text className="w-full" ellipsis>
+        <Typography.Text className="w-full text-left" ellipsis>
           {chatName}
         </Typography.Text>
       </Button>
