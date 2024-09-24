@@ -12,7 +12,6 @@ import { Admin, QuestionPart } from '../types';
 const initialModalState = {
   showCreateNewChatModal: false,
   showDeleteChatModal: false,
-  showSaveChatModal: false,
   showUpdateChatNameModal: false,
   showCorrectExpressionModal: false,
   showLogoutModal: false,

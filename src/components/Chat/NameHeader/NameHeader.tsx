@@ -1,11 +1,12 @@
-import { MoreOutlined } from '@ant-design/icons';
+import { useState } from 'react';
 import { ConfigProvider, Dropdown, Flex, MenuProps } from 'antd';
+import { LoadingOutlined, MoreOutlined } from '@ant-design/icons';
 
 type NameHeaderProps = {
   initialChatName: string;
   isHistorySaved: boolean;
   onUpdateName: () => void;
-  onSaveChat: () => void;
+  onSaveChat: () => Promise<boolean>;
 };
 
 export const NameHeader = ({
@@ -14,9 +15,15 @@ export const NameHeader = ({
   onUpdateName,
   onSaveChat,
 }: NameHeaderProps) => {
-  const onMenuClick: MenuProps['onClick'] = (e) => {
+  const [isSaving, setIsSaving] = useState(false);
+
+  const onMenuClick: MenuProps['onClick'] = async (e) => {
     if (e.key === 'save') {
-      onSaveChat();
+      setIsSaving(true);
+
+      await onSaveChat();
+
+      setIsSaving(false);
     } else {
       onUpdateName();
     }
@@ -27,6 +34,7 @@ export const NameHeader = ({
       key: 'save',
       label: 'Save',
       disabled: isHistorySaved,
+      icon: isSaving ? <LoadingOutlined /> : null,
     },
     {
       key: 'editName',
@@ -53,7 +61,7 @@ export const NameHeader = ({
         <Dropdown.Button
           type="text"
           menu={{ items, onClick: onMenuClick }}
-          icon={<MoreOutlined />}
+          icon={isSaving ? <LoadingOutlined /> : <MoreOutlined />}
           className="text-lg w-auto font-bold"
         >
           {initialChatName}

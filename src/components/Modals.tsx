@@ -1,7 +1,6 @@
 import {
   CorrectExpressionModal,
   LogoutModal,
-  SaveChatModal,
   UpdateChatNameModal,
   CreateNewChatModal,
   DeleteChatModal,
@@ -9,7 +8,6 @@ import {
 
 export const Modals = () => (
   <>
-    <SaveChatModal />
     <UpdateChatNameModal />
     <DeleteChatModal />
     <CreateNewChatModal />

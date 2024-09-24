@@ -82,25 +82,21 @@ export const Chat = () => {
     openModal('CorrectExpressionModal');
   };
 
-  const onSaveChat = () => {
-    currentChat &&
-      setActiveItem({
-        chatName: currentChat?.name,
-        saveChat: async () => {
-          const res = await fetchData(
-            `/customers/chats/save/${currentChat.name}`,
-            'PUT',
-          );
+  const onSaveChat = async () => {
+    const res = await fetchData(
+      `/customers/chats/save/${currentChat!.name}`,
+      'PUT',
+    );
 
-          if (res.ok) {
-            const savedChat = (await res.json()) as SavedChat;
+    if (res.ok) {
+      const savedChat = (await res.json()) as SavedChat;
 
-            saveChat(savedChat);
-          }
-        },
-      });
+      saveChat(savedChat);
 
-    openModal('SaveChatModal');
+      return true;
+    }
+
+    return false;
   };
 
   const onUpdateChatName = () => {
