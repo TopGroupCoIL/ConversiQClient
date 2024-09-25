@@ -8,12 +8,14 @@ import { Answer, Chat, ChatHistory, Question, SavedChat } from '../types';
 
 type IChatState = {
   isLoading: boolean;
+  isCurrentChatSaved: boolean;
   currentChat: Chat | null;
   savedChats: SavedChat[];
 };
 
 const initialChatState = {
   isLoading: false,
+  isCurrentChatSaved: false,
   currentChat: null,
   savedChats: [],
 };

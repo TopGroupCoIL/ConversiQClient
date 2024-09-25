@@ -22,6 +22,7 @@ export const Chat = () => {
   const {
     currentChat,
     isLoading,
+    isCurrentChatSaved,
     setQuestion,
     setAnswer,
     updateChatName,
@@ -100,7 +101,7 @@ export const Chat = () => {
   };
 
   const onUpdateChatName = () => {
-    const updateName = async (updatedName: string) => {
+    const updateSavedConversationName = async (updatedName: string) => {
       const res = await fetchData(
         `/customers/chats/${currentChat?.id}/caption/${updatedName}`,
         'PUT',
@@ -114,7 +115,9 @@ export const Chat = () => {
     currentChat &&
       setActiveItem({
         chatName: currentChat?.name,
-        updateChatName: updateName,
+        updateChatName: isCurrentChatSaved
+          ? updateSavedConversationName
+          : updateChatName,
       });
 
     openModal('UpdateChatNameModal');
