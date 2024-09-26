@@ -38,6 +38,7 @@ export const DeleteChatModal = () => {
         <Button
           key="link"
           type="primary"
+          danger
           loading={isLoading}
           onClick={onDelete}
         >

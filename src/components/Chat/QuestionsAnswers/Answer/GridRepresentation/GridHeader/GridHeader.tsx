@@ -1,13 +1,14 @@
 import { Button, Dropdown, Flex, MenuProps } from 'antd';
 import {
   BarChartOutlined,
+  LineChartOutlined,
   MoreOutlined,
   PieChartOutlined,
   TableOutlined,
   // ShareAltOutlined,
   // UploadOutlined,
 } from '@ant-design/icons';
-import { /* ActionType, */ DisplayType } from '../../../../../../types';
+import { /* ActionType, */ PresentationType } from '../../../../../../types';
 
 type GridHeaderProps = {
   dataDescription: string;
@@ -24,28 +25,34 @@ export const GridHeader = ({
 
   const items: MenuProps['items'] = [
     {
-      label: (
-        <Flex justify="space-between" className="w-16">
-          Table <TableOutlined />
-        </Flex>
-      ),
-      key: DisplayType.table,
+      label: 'Table',
+      key: PresentationType.grid,
+      icon: <TableOutlined />,
     },
     {
-      label: (
-        <Flex justify="space-between" className="w-16">
-          Bar <BarChartOutlined />
-        </Flex>
-      ),
-      key: DisplayType.bar,
+      label: 'Bar',
+      icon: <BarChartOutlined />,
+      key: 'bar',
+      children: [
+        {
+          key: PresentationType.bar_chart,
+          label: 'Horizontal',
+        },
+        {
+          key: PresentationType.column_chart,
+          label: 'Vertical',
+        },
+      ],
     },
     {
-      label: (
-        <Flex justify="space-between" className="w-16">
-          Pie <PieChartOutlined />
-        </Flex>
-      ),
-      key: DisplayType.doughnut,
+      label: 'Line chart',
+      key: PresentationType.line_chart,
+      icon: <LineChartOutlined />,
+    },
+    {
+      label: 'Pie',
+      key: PresentationType.pie_chart,
+      icon: <PieChartOutlined />,
     },
     // {
     //   type: 'divider',

@@ -1,34 +1,28 @@
-import { Bar as BarChart } from 'react-chartjs-2';
-import { AnswerGrid } from '../../../../../../../types';
+import { Line as LineChart } from 'react-chartjs-2';
 import { TooltipItem } from 'chart.js';
+import { AnswerGrid } from '../../../../../../../types';
 import { generateColors } from '../../../../../../../utils';
 
-type BarProps = {
+type LineProps = {
   grid: AnswerGrid;
-  isHorizontal?: boolean;
 };
 
-export const Bar = ({ grid, isHorizontal }: BarProps) => {
+export const Line = ({ grid }: LineProps) => {
   const { rows, columns, data } = grid;
 
-  const colors = generateColors(rows.length);
+  const colors = generateColors(columns.length);
 
-  const datasets = rows.map((rowName, index) => ({
-    label: rowName,
+  const datasets = columns.map((columnName, index) => ({
+    label: columnName,
+    data: data.map((dataSet) => dataSet[index].value),
+    fill: false,
+    borderColor: colors[index],
     backgroundColor: colors[index],
-    barPercentage: 0.5,
-    borderRadius: 3,
-    minBarLength: 10,
-    maxBarThickness: 16,
-    pointStyle: 'circle',
-    data: data[index].map(({ value }) => value),
+    tension: 0.1,
   }));
-
-  const indexAxis = isHorizontal ? ('y' as const) : ('x' as const);
 
   const options = {
     maintainAspectRatio: false,
-    indexAxis,
     plugins: {
       legend: {
         position: 'right' as const,
@@ -41,11 +35,11 @@ export const Bar = ({ grid, isHorizontal }: BarProps) => {
       },
       tooltip: {
         callbacks: {
-          label: (context: TooltipItem<'bar'>) => {
+          label: (context: TooltipItem<'line'>) => {
             const rowIndex = context.datasetIndex;
             const columnIndex = context.dataIndex;
 
-            context.formattedValue = data[rowIndex][columnIndex].formattedValue;
+            context.formattedValue = data[columnIndex][rowIndex].formattedValue;
           },
         },
       },
@@ -54,16 +48,15 @@ export const Bar = ({ grid, isHorizontal }: BarProps) => {
 
   return (
     <div className="relative min-h-80 min-w-80 overflow-auto">
-      <BarChart
+      <LineChart
         style={{
-          height: rows.length * 50,
+          height: rows.length * 100,
         }}
         options={options}
         data={{
-          labels: columns,
+          labels: rows,
           datasets: datasets,
         }}
-        key={isHorizontal ? 'horizontal' : 'vertical'}
       />
     </div>
   );

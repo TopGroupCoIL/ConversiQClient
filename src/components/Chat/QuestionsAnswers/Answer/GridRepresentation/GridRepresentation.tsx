@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ActionType, AnswerGrid, DisplayType } from '../../../../../types';
+import { ActionType, AnswerGrid, PresentationType } from '../../../../../types';
 import { DataTable } from './DataTable';
-import { Bar, Doughnut } from './Charts';
+import { Bar, Doughnut, Line } from './Charts';
 import { GridHeader } from './GridHeader';
 
 type GridRepresentationProps = {
@@ -9,8 +9,8 @@ type GridRepresentationProps = {
 };
 
 export const GridRepresentation = ({ grid }: GridRepresentationProps) => {
-  const [displayType, setDisplayType] = useState<DisplayType>(
-    DisplayType.table,
+  const [displayType, setDisplayType] = useState<PresentationType>(
+    grid.presentationType,
   );
 
   const handleMenuItemClick = (key: string) => {
@@ -19,15 +19,23 @@ export const GridRepresentation = ({ grid }: GridRepresentationProps) => {
       return;
     }
 
-    setDisplayType(key as DisplayType);
+    setDisplayType(key as PresentationType);
   };
 
   const renderData = () => {
-    if (displayType === DisplayType.bar) {
+    if (displayType === PresentationType.bar_chart) {
+      return <Bar grid={grid} isHorizontal />;
+    }
+
+    if (displayType === PresentationType.column_chart) {
       return <Bar grid={grid} />;
     }
 
-    if (displayType === DisplayType.doughnut) {
+    if (displayType === PresentationType.line_chart) {
+      return <Line grid={grid} />;
+    }
+
+    if (displayType === PresentationType.pie_chart) {
       return <Doughnut grid={grid} />;
     }
 

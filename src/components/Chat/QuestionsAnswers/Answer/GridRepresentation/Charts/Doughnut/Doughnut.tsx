@@ -1,8 +1,8 @@
 import { Doughnut as DoughnutChart } from 'react-chartjs-2';
 import { AnswerGrid } from '../../../../../../../types';
-import { chartColors } from '../../../../../../../const';
 import { TooltipItem } from 'chart.js';
 import { Flex } from 'antd';
+import { generateColors } from '../../../../../../../utils';
 
 type DoughnutProps = {
   grid: AnswerGrid;
@@ -10,6 +10,8 @@ type DoughnutProps = {
 
 export const Doughnut = ({ grid }: DoughnutProps) => {
   const { rows, columns, data } = grid;
+
+  const colors = generateColors(columns.length);
 
   const defaultOptions = {
     maintainAspectRatio: false,
@@ -32,7 +34,7 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
             data: rows.map((_, rowIndex) => {
               return data[rowIndex][columnIndex].value;
             }),
-            backgroundColor: chartColors,
+            backgroundColor: colors,
             hoverOffset: 4,
           },
         ];

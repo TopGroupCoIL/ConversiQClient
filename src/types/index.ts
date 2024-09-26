@@ -88,6 +88,7 @@ export enum AnswerType {
 }
 
 export type AnswerGrid = {
+  presentationType: PresentationType;
   description: string;
   columns: string[];
   rows: string[];
@@ -134,10 +135,12 @@ export type AnswerToolbar = {
   onGoLowerClick: () => void;
 };
 
-export enum DisplayType {
-  table = 'table',
-  bar = 'bar',
-  doughnut = 'doughnut',
+export enum PresentationType {
+  grid = 'grid',
+  column_chart = 'column chart',
+  bar_chart = 'bar chart',
+  line_chart = 'line chart',
+  pie_chart = 'pie chart',
 }
 
 export enum ActionType {
