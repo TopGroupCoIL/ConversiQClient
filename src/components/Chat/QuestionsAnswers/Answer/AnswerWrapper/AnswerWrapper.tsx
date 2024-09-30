@@ -9,10 +9,10 @@ type AnswerWrapperProps = {
 export const AnswerWrapper = ({
   children,
   isLoading,
-  styledClasses,
-}: AnswerWrapperProps) => {
+}: // styledClasses temporary,
+AnswerWrapperProps) => {
   return (
-    <Flex className={`w-full ${styledClasses || ''}`}>
+    <Flex className={`w-full max-w-full`}>
       <Flex
         vertical
         justify="center"
