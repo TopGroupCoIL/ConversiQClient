@@ -16,13 +16,11 @@ export const DataTable = ({ grid }: DataTableProps) => {
       title: grid.cornerInfo || '',
       dataIndex: 'name',
       key: 'name',
-      width: 150,
     },
     ...grid.columns.map((title) => ({
       title,
       dataIndex: title,
       key: title,
-      width: 120,
     })),
   ];
 
@@ -48,8 +46,8 @@ export const DataTable = ({ grid }: DataTableProps) => {
       dataSource={dataSource}
       pagination={false}
       bordered
-      tableLayout="fixed"
       size="small"
+      scroll={{ x: '100%' }}
     />
   );
 };

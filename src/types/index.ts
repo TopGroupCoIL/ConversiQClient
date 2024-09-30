@@ -117,7 +117,6 @@ export type Answer = {
 };
 
 export type AnswerToolbar = {
-  isAsking: boolean;
   isDisabled: boolean;
   selectedQuestionType: QuestionType | null;
   showAll?: boolean;

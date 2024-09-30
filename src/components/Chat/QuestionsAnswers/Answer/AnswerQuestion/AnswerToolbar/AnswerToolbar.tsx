@@ -2,7 +2,7 @@ import { Button, Flex } from 'antd';
 import {
   AnswerToolbar as AnswerToolbarProps,
   QuestionType,
-} from '../../../../../types';
+} from '../../../../../../types';
 
 export const AnswerToolbar = ({
   isDisabled,
