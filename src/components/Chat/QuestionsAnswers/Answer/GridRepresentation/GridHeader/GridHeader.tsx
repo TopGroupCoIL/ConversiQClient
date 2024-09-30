@@ -1,7 +1,7 @@
 import { Button, Dropdown, Flex, MenuProps } from 'antd';
 import {
   BarChartOutlined,
-  LineChartOutlined,
+  // LineChartOutlined,
   MoreOutlined,
   PieChartOutlined,
   TableOutlined,
@@ -32,23 +32,28 @@ export const GridHeader = ({
     {
       label: 'Bar',
       icon: <BarChartOutlined />,
-      key: 'bar',
-      children: [
-        {
-          key: PresentationType.bar_chart,
-          label: 'Horizontal',
-        },
-        {
-          key: PresentationType.column_chart,
-          label: 'Vertical',
-        },
-      ],
+      key: PresentationType.column_chart,
     },
-    {
-      label: 'Line chart',
-      key: PresentationType.line_chart,
-      icon: <LineChartOutlined />,
-    },
+    // {
+    //   label: 'Bar',
+    //   icon: <BarChartOutlined />,
+    //   key: 'bar',
+    //   children: [
+    //     {
+    //       key: PresentationType.bar_chart,
+    //       label: 'Horizontal',
+    //     },
+    //     {
+    //       key: PresentationType.column_chart,
+    //       label: 'Vertical',
+    //     },
+    //   ],
+    // },
+    // {
+    //   label: 'Line chart',
+    //   key: PresentationType.line_chart,
+    //   icon: <LineChartOutlined />,
+    // },
     {
       label: 'Pie',
       key: PresentationType.pie_chart,
