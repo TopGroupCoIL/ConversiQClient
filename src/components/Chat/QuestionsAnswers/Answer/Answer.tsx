@@ -35,7 +35,7 @@ export const Answer = ({
 
   if (answer.type === AnswerType.error) {
     return (
-      <AnswerWrapper>
+      <AnswerWrapper notFullWidth>
         <span>{answer.error || 'Sorry, unable to process your request.'}</span>
       </AnswerWrapper>
     );
