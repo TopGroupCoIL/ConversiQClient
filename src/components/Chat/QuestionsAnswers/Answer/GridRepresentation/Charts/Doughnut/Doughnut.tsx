@@ -26,7 +26,7 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
   };
 
   return (
-    <Flex wrap>
+    <Flex wrap className="w-full h-full overflow-auto">
       {columns.map((column, columnIndex) => {
         const datasets = [
           {
@@ -61,7 +61,9 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
         };
 
         return (
-          <div className={columns.length > 1 ? 'w-1/2' : 'w-full'}>
+          <div
+            className={columns.length > 1 ? `w-1/2 h-full` : `w-full h-full`}
+          >
             <DoughnutChart
               options={options}
               data={{

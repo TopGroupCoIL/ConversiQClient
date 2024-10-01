@@ -88,8 +88,10 @@ export const GridHeader = ({
   };
 
   return (
-    <Flex align="center" justify="space-between" className="mb-4">
-      <span className="w-3/4 font-bold text-base">{dataDescription}</span>
+    <Flex align="center" justify="space-between" className="w-full h-9 mb-4">
+      <span className="w-[calc(100%-48px)] h-full font-bold text-base truncate">
+        {dataDescription}
+      </span>
       <Dropdown menu={menuProps} className="block ml-full">
         <Button type="text" icon={<MoreOutlined />} />
       </Dropdown>

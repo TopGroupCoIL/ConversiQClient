@@ -47,7 +47,6 @@ export const DataTable = ({ grid }: DataTableProps) => {
       pagination={false}
       bordered
       size="small"
-      scroll={{ x: '100%' }}
     />
   );
 };

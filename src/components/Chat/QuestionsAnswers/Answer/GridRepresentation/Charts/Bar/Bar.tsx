@@ -53,7 +53,7 @@ export const Bar = ({ grid, isHorizontal }: BarProps) => {
   };
 
   return (
-    <div className="relative min-h-80 min-w-80 overflow-auto">
+    <div className="relative w-full h-full min-h-80 min-w-80 overflow-auto p-1.5">
       <BarChart
         style={{
           height: rows.length * 50,

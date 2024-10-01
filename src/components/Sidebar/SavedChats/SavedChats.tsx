@@ -38,7 +38,7 @@ export const SavedChats = () => {
     };
 
     fetchSavedChats();
-  }, []);
+  }, [setSavedChats]);
 
   if (isLoading) {
     return null;

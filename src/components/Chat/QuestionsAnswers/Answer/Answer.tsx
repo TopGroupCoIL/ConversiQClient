@@ -54,7 +54,7 @@ export const Answer = ({
 
   if (answer.type !== AnswerType.result) {
     return (
-      <AnswerWrapper>
+      <AnswerWrapper notFullWidth>
         <AnswerQuestion
           answer={answer}
           isLastAnswer={isLastAnswer}
