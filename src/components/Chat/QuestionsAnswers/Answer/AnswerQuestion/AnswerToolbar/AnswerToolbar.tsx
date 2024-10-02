@@ -1,4 +1,5 @@
 import { Button, Flex } from 'antd';
+import { UseSelectedButton } from './UseSelectedButton';
 import {
   AnswerToolbar as AnswerToolbarProps,
   QuestionType,
@@ -29,16 +30,13 @@ export const AnswerToolbar = ({
       align="center"
     >
       {showUseThis && (
-        <Button
-          className="w-44"
-          disabled={
+        <UseSelectedButton
+          isDisabled={
             (!isDisabled && disableExpressionFound) ||
             QuestionType.found === selectedQuestionType
           }
           onClick={!isDisabled ? onUseThisClick : undefined}
-        >
-          Use the selected items
-        </Button>
+        />
       )}
       {showGoLower && (
         <Button
