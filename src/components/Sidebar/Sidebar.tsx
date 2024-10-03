@@ -155,6 +155,7 @@ export const Sidebar = () => {
             onClick={() => {
               navigate('/administration');
             }}
+            disabled
           >
             {collapsed ? '' : 'Administration'}
           </Button>
@@ -186,8 +187,8 @@ export const Sidebar = () => {
         <SavedChats />
         <Flex
           vertical
-          className="w-full h-32 mt-8 mb-10 self-end"
-          justify="space-between"
+          className="w-full mt-8 mb-10 self-end [&>button:not(:last-child)]:mb-4"
+          justify="flex-start"
           align={collapsed ? 'center' : 'flex-start'}
         >
           {renderBottomItems()}
