@@ -31,7 +31,7 @@ export const AnswerWrapper = ({
           !isLoading
             ? !notFullWidth
               ? 'w-[calc(100%-50px)]'
-              : 'max-w-full'
+              : 'w-[calc(100%-50px)]'
             : ''
         } mt-[15px] ml-[15px] p-2.5 border border-solid border-[#737785] rounded-md bg-white`}
       >

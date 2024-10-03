@@ -156,7 +156,7 @@ export const Chat = () => {
         />
       )}
       {currentChat ? (
-        <div className="w-full h-full pt-16 pb-32 pl-16">
+        <div className="w-full h-full pt-16 pb-16 md:pb-32 pl-4 lg:pl-8">
           <QuestionsAnswers
             chatHistory={currentChat.history}
             askQuestion={askQuestion}
@@ -171,7 +171,7 @@ export const Chat = () => {
       <Flex
         justify="center"
         align="center"
-        className="absolute w-full h-32 bottom-0 bg-babyPowder"
+        className="absolute w-full h-16 md:h-32 bottom-0 bg-babyPowder"
       >
         <QuestionInput
           ask={askQuestion}

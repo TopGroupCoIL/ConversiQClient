@@ -41,7 +41,7 @@ export const QuestionsAnswers = (props: QuestionsAnswersProps) => {
       vertical
       align="flex-start"
       justify="flex-start"
-      className="w-full h-full overflow-auto pr-16"
+      className="w-full h-full overflow-auto pr-4 lg:pr-8"
       ref={messagesEndRef}
     >
       {chatHistory.map(({ question, answer }, index) => {

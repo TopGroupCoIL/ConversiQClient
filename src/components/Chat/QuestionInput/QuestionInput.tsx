@@ -35,7 +35,7 @@ export const QuestionInput = ({
   };
 
   return (
-    <Flex className="w-full max-w-lg mb-16">
+    <Flex className="w-4/5 max-w-lg sm:mb-8 md:mb-16">
       <Input
         value={question}
         placeholder="Write here..."

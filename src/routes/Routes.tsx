@@ -24,11 +24,7 @@ const PrivateRoutes = () => {
   const { currentChat } = useChat();
 
   return cookies.get(ACCESS_TOKEN) ? (
-    <Layout
-      className={`w-full h-full bg-babyPowder ${
-        !currentChat && 'bg-wave bg-no-repeat bg-contain'
-      }`}
-    >
+    <Layout className={`w-full h-full bg-babyPowder ${!currentChat && ''}`}>
       <Sidebar />
       <Layout.Content>
         <Outlet />

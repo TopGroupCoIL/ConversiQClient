@@ -61,53 +61,53 @@ export const GridRepresentation = ({ grid }: GridRepresentationProps) => {
       const dataSize = grid.columns.length;
 
       if (dataSize <= 3) {
-        return 'max-w-[50%]';
+        return 'lg:max-w-[50%]';
       }
 
       if (dataSize <= 6) {
-        return 'max-w-[70%]';
+        return 'lg:max-w-[70%]';
       }
 
       if (dataSize <= 10) {
-        return 'max-w-[90%]';
+        return 'lg:max-w-[90%]';
       }
 
-      return 'max-w-full';
+      return 'lg:max-w-full';
     }
 
     if (presentationType === PresentationType.pie_chart) {
       const dataSize = grid.rows.length;
 
       if (dataSize <= 6) {
-        return 'max-w-[80%] aspect-[2/1]';
+        return 'lg:max-w-[80%] aspect-[2/1]';
       }
 
       if (dataSize <= 12) {
-        return 'max-w-[85%] aspect-[2/1]';
+        return 'lg:max-w-[85%] aspect-[2/1]';
       }
 
       if (dataSize <= 24) {
-        return 'max-w-[90%] aspect-[5/2]';
+        return 'lg:max-w-[90%] aspect-[5/2]';
       }
 
-      return 'max-w-full aspect-[10/3]';
+      return 'lg:max-w-full aspect-[10/3]';
     }
 
     const dataSize = grid.rows.length;
 
     if (dataSize <= 6) {
-      return 'max-w-[80%] aspect-[10/8]';
+      return 'lg:max-w-[80%] aspect-[10/8]';
     }
 
     if (dataSize <= 12) {
-      return 'max-w-[85%] aspect-[10/8]';
+      return 'lg:max-w-[85%] aspect-[10/8]';
     }
 
     if (dataSize <= 24) {
-      return 'max-w-[90%] aspect-[2/1]';
+      return 'lg:max-w-[90%] aspect-[2/1]';
     }
 
-    return 'max-w-full aspect-[10/4]';
+    return 'lg:max-w-full aspect-[10/4]';
   };
 
   const maxWidth = getContainerWidth();
