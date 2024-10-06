@@ -33,7 +33,11 @@ export const UserDropdown = ({ isSidebarCollapsed }: UserDropdownProps) => {
   return (
     <Dropdown menu={{ items }} className="bg-white">
       <Space>
-        <Button type="text" style={{ fontSize: 16 }} icon={<UserOutlined />}>
+        <Button
+          type="text"
+          style={{ fontSize: 16, fontWeight: 200 }}
+          icon={<UserOutlined />}
+        >
           {isSidebarCollapsed ? '' : user?.name}
         </Button>
       </Space>

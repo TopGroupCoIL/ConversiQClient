@@ -1,7 +1,7 @@
-import { SendOutlined } from '@ant-design/icons';
-import { Button, ConfigProvider, Flex, Input } from 'antd';
 import { ChangeEvent, useState } from 'react';
+import { Button, ConfigProvider, Flex, Input } from 'antd';
 import { Question, QuestionType } from '../../../types';
+import { InputVector } from '../../../assets/InputVector';
 
 type QuestionInputProps = {
   isAsking: boolean;
@@ -40,7 +40,7 @@ export const QuestionInput = ({
         value={question}
         placeholder="Write here..."
         disabled={isAsking}
-        className="w-full"
+        className="w-full h-[50px] font-inter text-[18px]"
         onChange={onInputChange}
         onPressEnter={onEnterButtonClick}
       />
@@ -56,8 +56,8 @@ export const QuestionInput = ({
           type="primary"
           loading={isAsking}
           disabled={isAsking}
-          icon={<SendOutlined />}
-          className="ml-2"
+          icon={<InputVector />}
+          className="ml-2 box-border !w-[50px] !h-[50px]"
           onClick={onEnterButtonClick}
         />
       </ConfigProvider>

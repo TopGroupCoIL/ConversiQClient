@@ -40,7 +40,7 @@ export const Question = ({ question, user }: QuestionProps) => {
               vertical
               justify="center"
               align="center"
-              className="w-[30px] h-[30px] border-2 border-solid border-black rounded-full text-center font-bold bg-[#f6ffed]"
+              className="w-[30px] h-[30px] border-[1.5px] border-solid border-[#353535] rounded-full text-center font-bold bg-[#f6ffed]"
             >
               {userInitials}
             </Flex>
@@ -49,7 +49,7 @@ export const Question = ({ question, user }: QuestionProps) => {
           <UserOutlined />
         )}
       </span>
-      <div className="mt-[15px] ml-[15px] p-2.5 border border-solid border-[#737785] rounded-md bg-[#E6FCE1]">
+      <div className="mt-[15px] ml-[15px] p-2.5 border border-solid border-[#737785] rounded-md bg-[#E6FCE1] shadow-message font-inter font-normal text-base">
         {questionValue}
       </div>
     </Flex>

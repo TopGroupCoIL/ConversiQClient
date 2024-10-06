@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ConfigProvider, Dropdown, Flex, MenuProps } from 'antd';
+import { Dropdown, Flex, MenuProps } from 'antd';
 import { LoadingOutlined, MoreOutlined } from '@ant-design/icons';
 
 type NameHeaderProps = {
@@ -35,10 +35,12 @@ export const NameHeader = ({
       label: 'Save',
       disabled: isHistorySaved,
       icon: isSaving ? <LoadingOutlined /> : null,
+      className: 'font-inter',
     },
     {
       key: 'editName',
       label: 'Edit name',
+      className: 'font-inter',
     },
   ];
 
@@ -48,25 +50,14 @@ export const NameHeader = ({
       align="center"
       className="absolute w-full px-16 h-16 top-0"
     >
-      <ConfigProvider
-        theme={{
-          components: {
-            Button: {
-              contentFontSize: 24,
-              fontWeight: 700,
-            },
-          },
-        }}
+      <Dropdown.Button
+        type="text"
+        menu={{ items, onClick: onMenuClick }}
+        icon={isSaving ? <LoadingOutlined /> : <MoreOutlined />}
+        className="*:text-2xl *:font-inter *:font-bold"
       >
-        <Dropdown.Button
-          type="text"
-          menu={{ items, onClick: onMenuClick }}
-          icon={isSaving ? <LoadingOutlined /> : <MoreOutlined />}
-          className="text-lg w-auto font-bold"
-        >
-          {initialChatName}
-        </Dropdown.Button>
-      </ConfigProvider>
+        {initialChatName}
+      </Dropdown.Button>
     </Flex>
   );
 };

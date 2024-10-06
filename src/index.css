@@ -1,13 +1,9 @@
+@import url('./assets/fonts/stylesheet.css');
+
 @layer tailwind-base, antd;
 
 @layer tailwind-base {
   @tailwind base;
-
-  @font-face {
-    font-family: 'ArialRoundedMTBold';
-    font-weight: 700;
-    src: url('./assets/fonts/arialroundedmtbold.ttf') format('woff');
-  }
 }
 
 @tailwind components;
@@ -43,4 +39,10 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
   background: #c5c5c5;
+}
+
+.ant-table table {
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 14px;
 }

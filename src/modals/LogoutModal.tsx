@@ -37,7 +37,13 @@ export const LogoutModal = () => {
         >
           Go back
         </Button>,
-        <Button key="logout" type="primary" danger onClick={onLogout}>
+        <Button
+          key="logout"
+          type="primary"
+          danger
+          onClick={onLogout}
+          className="font-inter"
+        >
           Logout
         </Button>,
       ]}

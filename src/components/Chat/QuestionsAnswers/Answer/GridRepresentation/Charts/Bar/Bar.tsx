@@ -37,6 +37,12 @@ export const Bar = ({ grid, isHorizontal }: BarProps) => {
           align: 'start' as const,
           padding: 15,
           usePointStyle: true,
+          font: {
+            family: 'Arial Rounded MT Bold',
+            size: 12,
+            weight: 'bold' as const,
+            lineHeight: 14.52,
+          },
         },
       },
       tooltip: {

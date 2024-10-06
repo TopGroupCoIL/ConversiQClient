@@ -28,11 +28,13 @@ export const GridHeader = ({
       label: 'Table',
       key: PresentationType.grid,
       icon: <TableOutlined />,
+      className: 'font-inter',
     },
     {
       label: 'Bar',
       icon: <BarChartOutlined />,
       key: PresentationType.column_chart,
+      className: 'font-inter',
     },
     // {
     //   label: 'Bar',
@@ -58,6 +60,7 @@ export const GridHeader = ({
       label: 'Pie',
       key: PresentationType.pie_chart,
       icon: <PieChartOutlined />,
+      className: 'font-inter',
     },
     // {
     //   type: 'divider',
@@ -89,7 +92,7 @@ export const GridHeader = ({
 
   return (
     <Flex align="center" justify="space-between" className="w-full h-9 mb-4">
-      <span className="w-[calc(100%-48px)] h-full font-bold text-base truncate">
+      <span className="w-[calc(100%-48px)] h-full font-inter font-bold text-base truncate">
         {dataDescription}
       </span>
       <Dropdown menu={menuProps} className="block ml-full">

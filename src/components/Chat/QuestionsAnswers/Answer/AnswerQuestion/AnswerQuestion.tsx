@@ -89,7 +89,9 @@ export const AnswerQuestion = ({
   };
   return (
     <>
-      <div className="mb-2.5">{answer.question}</div>
+      <div className="mb-2.5 font-inter font-normal text-base">
+        {answer.question}
+      </div>
       <AnswerOptions
         options={answer.options}
         selectedOptions={answer.selected}

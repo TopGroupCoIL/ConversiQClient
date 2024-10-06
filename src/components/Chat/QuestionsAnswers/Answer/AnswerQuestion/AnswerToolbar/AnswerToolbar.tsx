@@ -24,7 +24,7 @@ export const AnswerToolbar = ({
 }: AnswerToolbarProps) => {
   return (
     <Flex
-      className="w-full [&>*:not(:last-child)]:mr-2 [&>button]:m-2"
+      className="w-full [&>*:not(:last-child)]:mr-2 [&>button]:m-2 *:font-inter"
       wrap
       justify="center"
       align="center"

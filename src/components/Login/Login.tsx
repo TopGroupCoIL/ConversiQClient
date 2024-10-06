@@ -50,7 +50,7 @@ export const Login = () => {
 
   return (
     <Layout className="relative w-full h-full flex justify-center items-center">
-      <Title className="text-center">
+      <Title className="text-center font-arialRoundedMTBold">
         ConversiQ
         <br />
         By Panorama
@@ -62,6 +62,7 @@ export const Login = () => {
         href={msLoginLink}
         loading={isLogging}
         disabled={isLogging}
+        className="font-inter"
       >
         Login
       </Button>

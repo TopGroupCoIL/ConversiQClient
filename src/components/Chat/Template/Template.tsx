@@ -16,12 +16,16 @@ export const Template = () => {
           align="center"
           className="h-full self-center aspect-square bg-ellipse bg-no-repeat bg-contain"
         >
-          <span className="font-sans font-bold text-[60px]">ConversiQ</span>
-          <span className="text-[30px] tracking-[10px]">By Panorama</span>
+          <span className="font-arialRoundedMTBold font-normal text-[80px]">
+            ConversiQ
+          </span>
+          <span className="font-rubik font-light text-[40px] tracking-[16px]">
+            By Panorama
+          </span>
         </Flex>
       </Flex>
       <HowToUse />
-      <div className="w-4/5 font-bold text-center">
+      <div className="w-4/5 font-inter font-bold text-center">
         Copyright © 2024 Panorama Software. All rights reserved.
       </div>
     </div>

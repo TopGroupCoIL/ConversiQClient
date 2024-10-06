@@ -26,7 +26,7 @@ export const AnswerOptions = ({
         >
           <Button
             type={selectedOptions.includes(option) ? 'primary' : 'default'}
-            className="m-2"
+            className="m-2 font-inter font-normal text-base"
             onClick={() => {
               if (isLastAnswer) {
                 selectOption(option);

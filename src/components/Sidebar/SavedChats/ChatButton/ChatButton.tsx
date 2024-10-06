@@ -29,7 +29,7 @@ export const ChatButton = ({
   const popoverContent = !isEllipsis ? (
     <Button danger icon={<DeleteOutlined />} onClick={onDeleteButtonClick} />
   ) : (
-    <Space>
+    <Space className="text-sm font-inter font-normal">
       {chatName}
       <Button danger icon={<DeleteOutlined />} onClick={onDeleteButtonClick} />
     </Space>
@@ -43,7 +43,10 @@ export const ChatButton = ({
         onClick={onChatButtonClick}
         ref={buttonRef}
       >
-        <Typography.Text className="w-full text-left" ellipsis>
+        <Typography.Text
+          className="w-full text-left text-sm font-inter font-normal"
+          ellipsis
+        >
           {chatName}
         </Typography.Text>
       </Button>
