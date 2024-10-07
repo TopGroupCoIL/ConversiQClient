@@ -38,9 +38,13 @@ export const Chat = () => {
 
     setQuestion(question);
 
+    console.log('Debug info - REQUEST:', question);
+
     const res = await fetchData('/ask', 'POST', JSON.stringify(question));
 
     const answer = (await res.json()) as Answer;
+
+    console.log('Debug info - RESPONSE:', answer);
 
     if (answer.options && answer.options.length) {
       answer.selected = [];
