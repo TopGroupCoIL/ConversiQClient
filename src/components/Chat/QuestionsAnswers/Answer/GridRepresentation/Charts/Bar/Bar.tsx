@@ -47,11 +47,16 @@ export const Bar = ({ grid, isHorizontal }: BarProps) => {
       },
       tooltip: {
         callbacks: {
+          title: () => {
+            return '';
+          },
           label: (context: TooltipItem<'bar'>) => {
             const rowIndex = context.datasetIndex;
             const columnIndex = context.dataIndex;
 
-            context.formattedValue = data[rowIndex][columnIndex].formattedValue;
+            const valueToDisplay = data[rowIndex][columnIndex].formattedValue;
+
+            return `${context.dataset.label}: ${valueToDisplay}`;
           },
         },
       },

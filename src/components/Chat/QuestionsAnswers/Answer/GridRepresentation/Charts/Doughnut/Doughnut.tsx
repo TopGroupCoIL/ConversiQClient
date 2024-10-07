@@ -49,11 +49,16 @@ export const Doughnut = ({ grid }: DoughnutProps) => {
             },
             tooltip: {
               callbacks: {
+                title: () => {
+                  return '';
+                },
                 label: (context: TooltipItem<'doughnut'>) => {
                   const rowIndex = context.dataIndex;
 
-                  context.formattedValue =
+                  const valueToDisplay =
                     data[rowIndex][columnIndex].formattedValue;
+
+                  return `${context.label}: ${valueToDisplay}`;
                 },
               },
             },
