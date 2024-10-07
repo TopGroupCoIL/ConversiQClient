@@ -140,13 +140,6 @@ export const Sidebar = () => {
       </>
     ) : (
       <>
-        <Button
-          type="text"
-          style={{ fontSize: 16 }}
-          icon={<QuestionCircleOutlined />}
-        >
-          {collapsed ? '' : 'Help'}
-        </Button>
         {user.isAdmin && (
           <Button
             type="text"
@@ -160,6 +153,14 @@ export const Sidebar = () => {
             {collapsed ? '' : 'Administration'}
           </Button>
         )}
+        <UserDropdown isSidebarCollapsed={collapsed} />
+        <Button
+          type="text"
+          style={{ fontSize: 16 }}
+          icon={<QuestionCircleOutlined />}
+        >
+          {collapsed ? '' : 'Help'}
+        </Button>
       </>
     );
 
@@ -187,12 +188,11 @@ export const Sidebar = () => {
         <SavedChats />
         <Flex
           vertical
-          className="w-full mt-8 mb-10 self-end [&>button:not(:last-child)]:mb-4 *:font-inter *:font-normal"
+          className="w-full mt-8 mb-10 self-end [&>*:not(:last-child)]:mb-4 *:font-inter *:font-normal"
           justify="flex-start"
           align={collapsed ? 'center' : 'flex-start'}
         >
           {renderBottomItems()}
-          <UserDropdown isSidebarCollapsed={collapsed} />
         </Flex>
       </div>
     </Layout.Sider>
