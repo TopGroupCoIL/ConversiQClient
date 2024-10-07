@@ -17,7 +17,7 @@ export const Question = ({ question, user }: QuestionProps) => {
       ? 'Show all options'
       : question.type === QuestionType.back
       ? 'Back'
-      : question.value || question.type;
+      : question.value?.replace('|', ' | ') || question.type;
 
   const userInitials = user?.name
     .split(' ')
