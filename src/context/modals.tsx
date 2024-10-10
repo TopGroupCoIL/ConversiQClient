@@ -7,13 +7,16 @@ import React, {
   SetStateAction,
   Dispatch,
 } from 'react';
-import { Admin, QuestionPart } from '../types';
+import { Admin, CustomerUser, QuestionPart } from '../types';
 
 const initialModalState = {
   showCreateNewChatModal: false,
   showDeleteChatModal: false,
   showUpdateChatNameModal: false,
   showCorrectExpressionModal: false,
+  showAddCustomerUserModal: false,
+  showEditCustomerUserModal: false,
+  showDeleteCustomerUserModal: false,
   showLogoutModal: false,
 };
 
@@ -29,11 +32,18 @@ type TActiveItem = {
   chatName?: string;
   chatId?: string;
   isHistorySaved?: boolean;
+  dataSources?: string[];
+  tenant?: string;
+  userIdToDelete?: string;
+  customerUser?: CustomerUser;
   onLeave?: (chatName?: string) => void;
   saveChat?: () => void;
   deleteChat?: () => void;
   updateChatName?: (chatName: string) => void;
   correctExpression?: (parts: QuestionPart[]) => void;
+  addNewUser?: (user: CustomerUser) => void;
+  editUser?: (user: CustomerUser) => void;
+  deleteUser?: (userId: string) => void;
 } | null;
 
 export interface IModalsContext<T = TActiveItem> extends IModalState {

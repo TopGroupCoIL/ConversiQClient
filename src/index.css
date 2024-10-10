@@ -9,6 +9,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: 'Inter';
+}
+
 body {
   height: 100vh;
   color: #353535;
@@ -41,8 +45,13 @@ body {
   background: #c5c5c5;
 }
 
+.ant-table-wrapper .ant-table {
+  scrollbar-color: unset;
+}
+
 .ant-table table {
   font-family: 'Inter';
   font-weight: 400;
   font-size: 14px;
+  scrollbar-color: unset;
 }

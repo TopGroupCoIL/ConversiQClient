@@ -21,6 +21,9 @@ export const DataTable = ({ grid }: DataTableProps) => {
       title,
       dataIndex: title,
       key: title,
+      render: (text: string) => {
+        return <div className="text-right">{text}</div>;
+      },
     })),
   ];
 

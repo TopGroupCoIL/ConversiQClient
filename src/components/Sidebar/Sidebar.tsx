@@ -3,6 +3,7 @@ import { useAuthContext } from '../../context/auth';
 import { UserDropdown } from './UserDropdown';
 import { SideBarHeader } from './SidebarHeader';
 import {
+  ArrowLeftOutlined,
   CommentOutlined,
   DatabaseOutlined,
   PlusCircleOutlined,
@@ -118,6 +119,15 @@ export const Sidebar = () => {
     isAdministrationPage ? (
       <>
         <Button
+          type="link"
+          icon={<ArrowLeftOutlined />}
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          Go back
+        </Button>
+        <Button
           type="text"
           style={{ fontSize: 16 }}
           icon={<SettingOutlined />}
@@ -148,7 +158,7 @@ export const Sidebar = () => {
             onClick={() => {
               navigate('/administration');
             }}
-            disabled
+            // disabled
           >
             {collapsed ? '' : 'Administration'}
           </Button>
@@ -185,7 +195,7 @@ export const Sidebar = () => {
         >
           {isAdministrationPage ? renderAdminItems() : renderDefaultItems()}
         </Flex>
-        <SavedChats />
+        {!isAdministrationPage && <SavedChats />}
         <Flex
           vertical
           className="w-full mt-8 mb-10 self-end [&>*:not(:last-child)]:mb-4 *:font-inter *:font-normal"

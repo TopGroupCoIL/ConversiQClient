@@ -4,6 +4,9 @@ import {
   UpdateChatNameModal,
   CreateNewChatModal,
   DeleteChatModal,
+  AddCustomerUserModal,
+  EditCustomerUserModal,
+  DeleteCustomerUserModal,
 } from '../modals';
 
 export const Modals = () => (
@@ -12,6 +15,9 @@ export const Modals = () => (
     <DeleteChatModal />
     <CreateNewChatModal />
     <CorrectExpressionModal />
+    <AddCustomerUserModal />
+    <EditCustomerUserModal />
+    <DeleteCustomerUserModal />
     <LogoutModal />
   </>
 );

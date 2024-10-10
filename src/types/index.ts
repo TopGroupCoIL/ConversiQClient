@@ -29,10 +29,10 @@ export type CustomerUser = {
   alias: string;
   tenant: string;
   isAdmin: boolean;
-  dbUserName: string;
-  dbPassword: string;
-  picture: string;
+  picture: string | null;
   dataSources: string[];
+  dbUserName?: null;
+  dbPassword?: null;
 };
 
 export type SavedChat = {
