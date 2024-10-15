@@ -30,3 +30,6 @@ export const generateColors = (numberOfColors: number): string[] => {
 
   return colors;
 };
+
+export const capitalizeFirstLetter = (word: string) =>
+  word.charAt(0).toUpperCase() + word.slice(1);

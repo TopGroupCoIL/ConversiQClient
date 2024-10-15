@@ -93,7 +93,7 @@ export const Sidebar = () => {
   const renderAdminItems = () => (
     <>
       <Button
-        type="text"
+        type={pathname === '/administration/dataSources' ? 'default' : 'text'}
         style={{ fontSize: 16 }}
         icon={<DatabaseOutlined />}
         onClick={() => {
@@ -103,7 +103,7 @@ export const Sidebar = () => {
         {collapsed ? '' : 'Data sources'}
       </Button>
       <Button
-        type="text"
+        type={pathname === '/administration/users' ? 'default' : 'text'}
         style={{ fontSize: 16 }}
         icon={<UserOutlined />}
         onClick={() => {
@@ -128,7 +128,7 @@ export const Sidebar = () => {
           Go back
         </Button>
         <Button
-          type="text"
+          type={pathname === '/administration/settings' ? 'default' : 'text'}
           style={{ fontSize: 16 }}
           icon={<SettingOutlined />}
           onClick={() => {
@@ -138,7 +138,7 @@ export const Sidebar = () => {
           {collapsed ? '' : 'Settings'}
         </Button>
         <Button
-          type="text"
+          type={pathname === '/administration/support' ? 'default' : 'text'}
           style={{ fontSize: 16 }}
           icon={<CommentOutlined />}
           onClick={() => {

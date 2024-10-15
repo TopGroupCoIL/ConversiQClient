@@ -23,6 +23,21 @@ export type Customer = {
   usersLimit: number;
 };
 
+export type DataSource = {
+  cube: string;
+  database: string;
+  defaultMeasure: string | null;
+  description: string;
+  name: string;
+  server: string;
+  tenant: string;
+};
+
+export type DataSourceMeasure = {
+  caption: string;
+  uName: string | null;
+};
+
 export type CustomerUser = {
   name: string;
   id: string;
